@@ -1,6 +1,6 @@
 2013-08-27
 
-This is my classwork for:
+Look in the apps folder to see my classwork for:
 
 Parsons MFA Design and Technology - 
 Fall 2013 semester - 
