@@ -1,16 +1,34 @@
-# Don't waste space and time backing up media files
+
+# OF-specific ignore patterns
+
+openFrameworks.a
+openFrameworksDebug.a
+openFrameworksUniversal.a
+
+#rule to avoid non-official addons going into git
+#see addons/.gitignore
+addons/*
+
+#rule to avoid non-official apps going into git
+#see apps/.gitignore
+apps/*
+
+#also, see examples/.gitignore
 
 # Some general ignore patterns
-build/
-obj/
+
+[Bb]uild/
+[Oo]bj/
 *.o
-Debug*/
-Release*/
+[Dd]ebug*/
+[Rr]elease*/
 *.mode*
 *.app/
 *.pyc
 .svn/
+*.log
 
+# IDE-specific ignore patterns
 
 #XCode
 *.pbxuser
@@ -30,6 +48,9 @@ xcuserdata
 *.sdf
 *.opensdf
 *.suo
+*.pdb
+*.ilk
+*.aps
 ipch/
 
 #Eclipse
@@ -37,13 +58,13 @@ ipch/
 local.properties
 .externalToolBuilders
 
-
 # OS-specific ignore patterns
 
 #Linux
 *~
 # KDE
 .directory
+.AppleDouble
 
 #OSX
 .DS_Store
@@ -64,3 +85,5 @@ Desktop.ini
 
 # Miscellaneous
 .mailmap
+
+of_v0.8.0_osx_release/algo2013/
