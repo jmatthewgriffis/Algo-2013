@@ -26,6 +26,8 @@ class testApp : public ofBaseApp{
     double xVel;
     double inc;
     int multi; // multiplier
-    bool shift;
+    float red; // multiplier
+    bool more;
+    bool less;
 		
 };
