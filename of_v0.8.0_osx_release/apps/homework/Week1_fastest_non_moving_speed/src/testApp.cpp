@@ -27,6 +27,7 @@ void testApp::setup(){
 //--------------------------------------------------------------
 void testApp::update(){
 
+    // Only update the timer and xPos if the rect hasn't reached the goal.
     if (xPos - wide/2 > reachMe) {
         frames++;
         xPos -= xVel;
@@ -68,6 +69,8 @@ void testApp::draw(){
     
     // Display elapsed time.
     ofDrawBitmapString("Time: " + ofToString(hours) + ":" + ofToString(minutes) + ":" + ofToString(seconds) + ":" + ofToString(frames), ofGetWidth()/2-70, 50);
+    
+    ofDrawBitmapString("Fastest speed: 0.0037.\nTime: 1:9:22.17\n(0.17 = 10 frames).\nDistance: 7.125 in.\nSpeed: 0.0017 in/s,\ni.e. approx. 9.66 x 10^-5 mph.", 40, 20);
     
     // Draw the finish line.
     ofLine(reachMe, 0, reachMe, ofGetHeight());
