@@ -5,11 +5,12 @@ void testApp::setup(){
     
     ofSetVerticalSync(true);
     ofSetRectMode(OF_RECTMODE_CENTER);
+    ofSetLineWidth(8);
 
     wide = 50;
     xPos = ofGetWidth()-wide;
     yPos = ofGetHeight()/2;
-    xVel = 0.005;
+    xVel = 0.0037;
     inc = 0.001;
     multi = 10;
     red = 0.1;
@@ -28,13 +29,33 @@ void testApp::update(){
 void testApp::draw(){
     
     ofBackground(50);
-    ofSetColor(120,75,240);
-    ofRect(xPos, yPos, wide, wide);
+    
+    // Tell the player what's up.
     ofSetColor(255);
-    ofDrawBitmapString("r to restart  |  click to set new position", ofGetWidth()/2-175, 20);
+    ofDrawBitmapString("r to reset  |  click to set new position", ofGetWidth()/2-175, 20);
+    
     ofDrawBitmapString("LEFT/RIGHT to change xVel  |  hold UP/DOWN for greater/lesser change  |  current = " + ofToString(xVel), ofGetWidth()/2-350, ofGetHeight()-10);
+    
     if (more && !less) ofDrawBitmapString("(more)", 658, ofGetHeight()-25);
     else if (!more && less) ofDrawBitmapString("(less)", 658, ofGetHeight()-25);
+    
+    ofDrawBitmapString("     Welcome to the\nWorld's most boring race", ofGetWidth()/2-100, ofGetHeight()/2);
+    
+    // Draw the finish line.
+    ofLine(25, 0, 25, ofGetHeight());
+    ofPushMatrix();
+    ofTranslate(-10, 17);
+    ofDrawBitmapString("F", ofPoint(50, ofGetHeight()/2-50));
+    ofDrawBitmapString("I", ofPoint(50, ofGetHeight()/2-35));
+    ofDrawBitmapString("N", ofPoint(50, ofGetHeight()/2-20));
+    ofDrawBitmapString("I", ofPoint(50, ofGetHeight()/2-5));
+    ofDrawBitmapString("S", ofPoint(50, ofGetHeight()/2+10));
+    ofDrawBitmapString("H", ofPoint(50, ofGetHeight()/2+25));
+    ofPopMatrix();
+    
+    // Draw our heroic rectangle.
+    ofSetColor(120,75,240);
+    ofRect(xPos, yPos, wide, wide);
 
 }
 
