@@ -11,7 +11,7 @@ void testApp::setup(){
     wide = 50;
     xPos = ofGetWidth()-wide;
     yPos = ofGetHeight()/2;
-    xVel = 0.0037;
+    xVel = 0.0037; // Fastest speed. Don't mess with this.
     inc = 0.001;
     multi = 10;
     red = 0.1;
@@ -67,10 +67,10 @@ void testApp::draw(){
     ofDrawBitmapString("     Welcome to the\nWorld's most boring race", ofGetWidth()/2-110, ofGetHeight()/2);
     
     // Display elapsed time.
-    ofDrawBitmapString("Time: " + ofToString(hours) + ":" + ofToString(minutes) + ":" + ofToString(seconds), ofGetWidth()/2-50, 50);
+    ofDrawBitmapString("Time: " + ofToString(hours) + ":" + ofToString(minutes) + ":" + ofToString(seconds) + ":" + ofToString(frames), ofGetWidth()/2-70, 50);
     
     // Draw the finish line.
-    ofLine(reachMe, 0, 25, ofGetHeight());
+    ofLine(reachMe, 0, reachMe, ofGetHeight());
     ofPushMatrix();
     ofTranslate(-10, 17);
     ofDrawBitmapString("F", ofPoint(50, ofGetHeight()/2-50));
