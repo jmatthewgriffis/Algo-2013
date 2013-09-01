@@ -23,6 +23,7 @@ class testApp : public ofBaseApp{
     
     int wide;
     double xPos;
+    int yPos;
     double xVel;
     double inc;
     int multi; // multiplier

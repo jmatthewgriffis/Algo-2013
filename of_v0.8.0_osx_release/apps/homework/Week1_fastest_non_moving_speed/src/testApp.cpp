@@ -8,6 +8,7 @@ void testApp::setup(){
 
     wide = 50;
     xPos = ofGetWidth()-wide;
+    yPos = ofGetHeight()/2;
     xVel = 0.005;
     inc = 0.001;
     multi = 10;
@@ -28,12 +29,12 @@ void testApp::draw(){
     
     ofBackground(50);
     ofSetColor(120,75,240);
-    ofRect(xPos, ofGetHeight()/2, wide, wide);
+    ofRect(xPos, yPos, wide, wide);
     ofSetColor(255);
-    ofDrawBitmapString("r to restart", ofGetWidth()/2-50, 20);
-    ofDrawBitmapString("LEFT/RIGHT to change xVel; hold UP/DOWN for greater/lesser change; current = " + ofToString(xVel), ofGetWidth()/2-300, ofGetHeight()-10);
-    if (more && !less) ofDrawBitmapString("(more)", 685, ofGetHeight()-25);
-    else if (!more && less) ofDrawBitmapString("(less)", 685, ofGetHeight()-25);
+    ofDrawBitmapString("r to restart  |  click to set new position", ofGetWidth()/2-175, 20);
+    ofDrawBitmapString("LEFT/RIGHT to change xVel  |  hold UP/DOWN for greater/lesser change  |  current = " + ofToString(xVel), ofGetWidth()/2-350, ofGetHeight()-10);
+    if (more && !less) ofDrawBitmapString("(more)", 658, ofGetHeight()-25);
+    else if (!more && less) ofDrawBitmapString("(less)", 658, ofGetHeight()-25);
 
 }
 
@@ -80,6 +81,9 @@ void testApp::mouseDragged(int x, int y, int button){
 //--------------------------------------------------------------
 void testApp::mousePressed(int x, int y, int button){
 
+    xPos = mouseX;
+    yPos = mouseY;
+    
 }
 
 //--------------------------------------------------------------
