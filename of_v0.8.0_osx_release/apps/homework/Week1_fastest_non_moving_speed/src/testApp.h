@@ -30,5 +30,7 @@ class testApp : public ofBaseApp{
     float red; // multiplier
     bool more;
     bool less;
+    int hours, minutes, seconds, frames;
+    int reachMe;
 		
 };

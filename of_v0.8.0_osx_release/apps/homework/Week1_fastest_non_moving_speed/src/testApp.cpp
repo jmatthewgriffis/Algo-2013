@@ -6,6 +6,7 @@ void testApp::setup(){
     ofSetVerticalSync(true);
     ofSetRectMode(OF_RECTMODE_CENTER);
     ofSetLineWidth(8);
+    ofSetFrameRate(60);
 
     wide = 50;
     xPos = ofGetWidth()-wide;
@@ -16,12 +17,34 @@ void testApp::setup(){
     red = 0.1;
     more = false;
     less = false;
+    frames = 0;
+    hours = 0;
+    minutes = 0;
+    seconds = 0;
+    reachMe = 25;
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
 
-    xPos -= xVel;
+    if (xPos - wide/2 > reachMe) {
+        frames++;
+        xPos -= xVel;
+    }
+    
+    // Update the clock:
+    if (frames >= 60) {
+        seconds++;
+        frames = 0;
+    }
+    if (seconds >= 60) {
+        minutes++;
+        seconds = 0;
+    }
+    if (minutes >= 60) {
+        hours++;
+        minutes = 0;
+    }
     
 }
 
@@ -32,17 +55,22 @@ void testApp::draw(){
     
     // Tell the player what's up.
     ofSetColor(255);
-    ofDrawBitmapString("r to reset  |  click to set new position", ofGetWidth()/2-175, 20);
+    ofDrawBitmapString("r to reset  |  click to set new position", ofGetWidth()/2-170, 20);
     
     ofDrawBitmapString("LEFT/RIGHT to change xVel  |  hold UP/DOWN for greater/lesser change  |  current = " + ofToString(xVel), ofGetWidth()/2-350, ofGetHeight()-10);
     
+    // Indicate modified controls.
     if (more && !less) ofDrawBitmapString("(more)", 658, ofGetHeight()-25);
     else if (!more && less) ofDrawBitmapString("(less)", 658, ofGetHeight()-25);
     
-    ofDrawBitmapString("     Welcome to the\nWorld's most boring race", ofGetWidth()/2-100, ofGetHeight()/2);
+    // Comment.
+    ofDrawBitmapString("     Welcome to the\nWorld's most boring race", ofGetWidth()/2-110, ofGetHeight()/2);
+    
+    // Display elapsed time.
+    ofDrawBitmapString("Time: " + ofToString(hours) + ":" + ofToString(minutes) + ":" + ofToString(seconds), ofGetWidth()/2-50, 50);
     
     // Draw the finish line.
-    ofLine(25, 0, 25, ofGetHeight());
+    ofLine(reachMe, 0, 25, ofGetHeight());
     ofPushMatrix();
     ofTranslate(-10, 17);
     ofDrawBitmapString("F", ofPoint(50, ofGetHeight()/2-50));
