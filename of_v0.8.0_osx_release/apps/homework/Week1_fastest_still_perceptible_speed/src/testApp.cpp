@@ -27,6 +27,7 @@ void testApp::setup(){
 //--------------------------------------------------------------
 void testApp::update(){
     
+    // Only update the timer and xPos if the rect hasn't reached the goal.
     if (xPos + wide/2 < reachMe) {
         frames++;
         xPos += xVel;
