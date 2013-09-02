@@ -27,5 +27,6 @@ public:
     // ofPoints have an x and y pos.
     ofPoint pos;
     ofColor _c;
+    bool offscreen;
     
 };

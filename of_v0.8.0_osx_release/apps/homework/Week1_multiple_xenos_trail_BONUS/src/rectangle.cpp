@@ -12,6 +12,7 @@
 Rectangle::Rectangle(){
     
     ofSetRectMode(OF_RECTMODE_CENTER);
+    offscreen = false;
     
 }
 

@@ -23,7 +23,14 @@ public:
     
     //    CHALLENGE: make a series of xeno objects which follow the mouse, each at different rates. give them slightly different colors so that you can perceive them as independent objects. you will have to modify the rectangle object so that they can have unique colors.
     
+    void makeNewRect(); // A custom function to generate a rect.
+    
     vector<Rectangle> myRects;
-    int numRects = 10;
+    int numInitRects; // Start with this many.
+    int angle; // Use for trig. rotation.
+    int rectTimer; // Use to generate new rects.
+    int rectRate; // How often to make a new rect.
+    float rad; // The radius of rotation.
+    float radRate; // How quickly to increase the radius.
     
 };
