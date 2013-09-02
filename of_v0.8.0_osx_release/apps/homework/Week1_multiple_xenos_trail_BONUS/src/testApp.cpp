@@ -45,9 +45,9 @@ void testApp::update(){
      */
     
     myRects[0].xenoToPoint(mouseX, mouseY);
-    for (int i = 0; i < myRects.size(); i++) {
+    for (int i = 1; i < myRects.size(); i++) {
 //        myRects[i].xenoToPoint(mouseX+i*10, mouseY-i*10); // Cool 3D effect
-        if (i > 0) myRects[i].xenoToPoint( myRects[i-1].pos.x , myRects[i-1].pos.y );
+        myRects[i].xenoToPoint(myRects[i-1].pos.x,myRects[i-1].pos.y);
     }
     
 }
