@@ -117,7 +117,7 @@ void testApp::draw(){
     
     // Tell the player what's up.
     ofSetColor(255);
-    ofDrawBitmapString("r to reset  |  click to set new position", ofGetWidth()/2-170, 20);
+    ofDrawBitmapString("r to reset  |  WASD and ARROWS to be mean", ofGetWidth()/2-170, 20);
     
     //    ofDrawBitmapString(ofToString(pct), 50, 20); // Debug
     //    ofDrawBitmapString(ofToString(pctVel), 50, 50); // Debug
