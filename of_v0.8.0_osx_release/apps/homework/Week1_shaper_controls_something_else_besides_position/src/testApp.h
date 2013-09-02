@@ -35,5 +35,6 @@ public:
     int lineOffset;
     int top, bottom, left, right, lineVel; // These locate the finish lines.
     bool top1, top2, bottom1, bottom2, left1, left2, right1, right2; // These allow movement.
+    ofColor c;
     
 };
