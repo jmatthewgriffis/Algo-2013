@@ -12,6 +12,17 @@ void testApp::makeNewRect(){
     rectTimer = 0; // Reset the rect generation timer.
     
 }
+//--------------------------------------------------------------
+void testApp::makeNewMouseRect(){
+    
+    // Create and set up a new rect.
+    Rectangle myRect;
+    myRect.setup(ofColor(100,100,100,255*0.5));
+    myRect.pos.x = ofRandom(0, ofGetWidth());
+    myRect.pos.y = ofRandom(0, ofGetHeight());
+    myMouseRects.push_back(myRect); // Add the rect to the vector.
+    
+}
 
 //--------------------------------------------------------------
 void testApp::setup(){
@@ -23,6 +34,7 @@ void testApp::setup(){
     // Cool math note about Xeno's paradox: math proves that 0.99 repeating is equal to 1. Why? 1/3 is 0.33 repeating. Multiply that by 3 and you get 0.99 repeating. But 1/3 * 3 = 1. Therefore 0.99 repeating = 1.
     
     numInitRects = 1;
+    numMouseRects = 5;
     angle = 0;
     rad = 100;
     rectTimer = 0;
@@ -32,6 +44,10 @@ void testApp::setup(){
     // Setup the initial rect(s).
     for (int i = 0; i < numInitRects; i++) {
         makeNewRect();
+    }
+    // Setup the mouse rect(s).
+    for (int i = 0; i < numMouseRects; i++) {
+        makeNewMouseRect();
     }
     
 }
@@ -65,7 +81,7 @@ void testApp::update(){
     myRects[0].pos.y = ofGetHeight()/2 + cos(ofDegToRad(angle))*rad;
     // Each successive rect follows the one before.
     for (int i = 1; i < myRects.size(); i++) {
-//        myRects[i].xenoToPoint(mouseX+i*10, mouseY-i*10); // Cool 3D effect
+        //        myRects[i].xenoToPoint(mouseX+i*10, mouseY-i*10); // Cool 3D effect
         myRects[i].xenoToPoint(myRects[i-1].pos.x,myRects[i-1].pos.y);
         
         // Also, calculate the distance from the center of the screen.
@@ -75,6 +91,15 @@ void testApp::update(){
             myRects[i].offscreen = true;
         }
     }
+    
+    
+    // Mouse rects work similarly but without trig and incl. the mouse.
+    myMouseRects[0].xenoToPoint(mouseX, mouseY);
+    // Each successive rect follows the one before.
+    for (int i = 1; i < myMouseRects.size(); i++) {
+        myMouseRects[i].xenoToPoint(myMouseRects[i-1].pos.x,myMouseRects[i-1].pos.y);
+    }
+    
     
     // Following up the boolean function we created above, this oF function sorts the vector according to the values of the booleans and then removes any with a 'true' value:
     ofRemove(myRects,bShouldIErase);
@@ -92,12 +117,23 @@ void testApp::draw(){
         myRects[i].draw();
     }
     
+    for (int i = 0; i < myMouseRects.size(); i++) {
+        myMouseRects[i].draw();
+    }
+    
 }
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
     
-    if (key == 'r') setup(); // Reset
+    if (key == 'r') {
+        
+        // Clear out the vectors (isn't automatic):
+        for (int i = 0; i < myRects.size(); i++) myRects.erase(myRects.begin(), myRects.end());
+        for (int i = 0; i < myMouseRects.size(); i++) myMouseRects.erase(myMouseRects.begin(), myMouseRects.end());
+        
+        setup(); // Reset
+    }
     
 }
 
