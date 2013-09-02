@@ -63,6 +63,44 @@ bool bShouldIErase(Rectangle & a){
 }
 
 //--------------------------------------------------------------
+void testApp::moveRects(){
+    
+    // First rect traces a circle using trig and an increasing angle.
+    myRects[0].pos.x = ofGetWidth()/2 + sin(ofDegToRad(angle))*rad;
+    myRects[0].pos.y = ofGetHeight()/2 + cos(ofDegToRad(angle))*rad;
+    
+    // Each successive rect follows the one before.
+    for (int i = 1; i < myRects.size(); i++) {
+        
+        myRects[i].xenoToPoint(myRects[i-1].pos.x,myRects[i-1].pos.y);
+        
+//        myRects[i].xenoToPoint(mouseX+i*10, mouseY-i*10); // Comment out the above and uncomment this for a cool 3D effect.
+        
+        // Also, calculate the distance from the center of the screen.
+        float dist = ofDist(ofGetWidth()/2, ofGetHeight()/2, myRects[i].pos.x, myRects[i].pos.y);
+        
+        // If the distance is too great, mark the rect for removal.
+        if (dist > ofGetWidth()/2) {
+            myRects[i].offscreen = true;
+        }
+    }
+    
+}
+
+//--------------------------------------------------------------
+void testApp::moveMouseRects(){
+    
+    // Mouse rects work similarly but without trig and incl. the mouse.
+    myMouseRects[0].xenoToPoint(mouseX, mouseY);
+    
+    // Each successive rect follows the one before.
+    for (int i = 1; i < myMouseRects.size(); i++) {
+        myMouseRects[i].xenoToPoint(myMouseRects[i-1].pos.x,myMouseRects[i-1].pos.y);
+    }
+    
+}
+
+//--------------------------------------------------------------
 void testApp::update(){
     
     angle++;
@@ -76,30 +114,8 @@ void testApp::update(){
     
     if (angle > 360) angle = 0;
     
-    // First rect traces a circle.
-    myRects[0].pos.x = ofGetWidth()/2 + sin(ofDegToRad(angle))*rad;
-    myRects[0].pos.y = ofGetHeight()/2 + cos(ofDegToRad(angle))*rad;
-    // Each successive rect follows the one before.
-    for (int i = 1; i < myRects.size(); i++) {
-        //        myRects[i].xenoToPoint(mouseX+i*10, mouseY-i*10); // Cool 3D effect
-        myRects[i].xenoToPoint(myRects[i-1].pos.x,myRects[i-1].pos.y);
-        
-        // Also, calculate the distance from the center of the screen.
-        float dist = ofDist(ofGetWidth()/2, ofGetHeight()/2, myRects[i].pos.x, myRects[i].pos.y);
-        // If the distance is too great, mark the rect for removal.
-        if (dist > ofGetWidth()/2) {
-            myRects[i].offscreen = true;
-        }
-    }
-    
-    
-    // Mouse rects work similarly but without trig and incl. the mouse.
-    myMouseRects[0].xenoToPoint(mouseX, mouseY);
-    // Each successive rect follows the one before.
-    for (int i = 1; i < myMouseRects.size(); i++) {
-        myMouseRects[i].xenoToPoint(myMouseRects[i-1].pos.x,myMouseRects[i-1].pos.y);
-    }
-    
+    moveRects();
+    moveMouseRects();
     
     // Following up the boolean function we created above, this oF function sorts the vector according to the values of the booleans and then removes any with a 'true' value:
     ofRemove(myRects,bShouldIErase);
@@ -109,7 +125,7 @@ void testApp::update(){
 //--------------------------------------------------------------
 void testApp::draw(){
     
-    cout<<myRects.size()<<endl; // Debug vector size.
+//    cout<<myRects.size()<<endl; // Debug vector size.
     
     ofBackground(50);
     
@@ -128,7 +144,7 @@ void testApp::keyPressed(int key){
     
     if (key == 'r') {
         
-        // Clear out the vectors (isn't automatic):
+        // Clear out the vectors on reset:
         for (int i = 0; i < myRects.size(); i++) myRects.erase(myRects.begin(), myRects.end());
         for (int i = 0; i < myMouseRects.size(); i++) myMouseRects.erase(myMouseRects.begin(), myMouseRects.end());
         

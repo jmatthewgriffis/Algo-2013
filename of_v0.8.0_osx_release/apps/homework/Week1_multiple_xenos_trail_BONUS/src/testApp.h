@@ -23,8 +23,12 @@ public:
     
     //    CHALLENGE: make a series of xeno objects which follow the mouse, each at different rates. give them slightly different colors so that you can perceive them as independent objects. you will have to modify the rectangle object so that they can have unique colors.
     
-    void makeNewRect(); // A custom function to generate a rect.
-    void makeNewMouseRect(); // A custom function to generate a rect.
+    // My custom functions:
+    void makeNewRect(); // Generate a rect.
+    void makeNewMouseRect(); // Generate a mouse rect.
+    void moveRects();
+    void moveMouseRects();
+    void whenRectsCollide(); // A special function for collision detection.
     
     vector<Rectangle> myRects;
     vector<Rectangle> myMouseRects;
