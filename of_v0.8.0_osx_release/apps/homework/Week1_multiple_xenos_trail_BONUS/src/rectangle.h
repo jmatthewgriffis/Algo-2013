@@ -28,6 +28,6 @@ public:
     ofPoint pos;
     int wide;
     ofColor _c;
-    bool offscreen, colliding;
+    bool offscreen;
     
 };

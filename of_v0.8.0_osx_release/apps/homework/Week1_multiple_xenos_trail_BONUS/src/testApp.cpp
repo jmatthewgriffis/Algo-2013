@@ -35,9 +35,9 @@ void testApp::setup(){
     
     numInitRects = 1;
     numMouseRects = 5;
-    rect_c = ofColor(50,50,255,255*0.5);
+    collided_c = ofColor(50,50,255,255*0.5);
     mouseRect_c = ofColor(100,100,100,255*0.5);
-    collided_c = 0;
+    rect_c = 0;
     angle = 0;
     rad = 100;
     rectTimer = 0;
@@ -108,25 +108,20 @@ void testApp::whenRectsCollide(){
     
     // Reset the color (if I place this later the change during collision becomes permanent).
     for (int i = 0; i < myRects.size(); i++) {
-        //        myRects[i]._c = rect_c;
-        myRects[i].colliding = false;
+        myRects[i]._c = rect_c;
     }
     for (int j = 0; j < myMouseRects.size(); j++) {
         myMouseRects[j]._c = mouseRect_c;
     }
     
-    // Collision detection! This compares each rect to all the rects in the other group, and if there's a collision, it changes the colliding rects' colors. The mouse rects revert after collision, while the orbiting rects switch color each collision.
+    // Collision detection! This compares each rect to all the rects in the other group, and if there's a collision, it changes the colliding rects' colors.
     for (int i = 0; i < myRects.size(); i++) {
         for (int j = 0; j < myMouseRects.size(); j++) {
             // Calculate the distance between the rects.
             float dist = ofDist(myRects[i].pos.x, myRects[i].pos.y, myMouseRects[j].pos.x, myMouseRects[j].pos.y);
             // If the distance is smaller than the combined radii, it's a collision, so change the color.
             if (dist < myRects[0].wide) {
-                if (!myRects[i].colliding) {
-                    if (myRects[i]._c == rect_c) myRects[i]._c = collided_c;
-                    else myRects[i]._c = rect_c;
-                    myRects[i].colliding = true;
-                }
+                myRects[i]._c = collided_c;
                 myMouseRects[j]._c = collided_c;
             }
         }
