@@ -172,13 +172,25 @@ void testApp::draw(){
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
     
-    if (key == 'r') {
-        
-        // Clear out the vectors on reset:
-        for (int i = 0; i < myRects.size(); i++) myRects.erase(myRects.begin(), myRects.end());
-        for (int i = 0; i < myMouseRects.size(); i++) myMouseRects.erase(myMouseRects.begin(), myMouseRects.end());
-        
-        setup(); // Reset
+    switch (key) {
+            
+        case 'r':
+        case 'R':
+            // Clear out the vectors on reset:
+            for (int i = 0; i < myRects.size(); i++) myRects.erase(myRects.begin(), myRects.end());
+            for (int i = 0; i < myMouseRects.size(); i++) myMouseRects.erase(myMouseRects.begin(), myMouseRects.end());
+            
+            setup(); // Reset
+            break;
+            
+            // Add and subtract mouse rects with the arrow keys.
+        case OF_KEY_LEFT:
+            if (myMouseRects.size() > 1) myMouseRects.erase(myMouseRects.end());
+            break;
+            
+        case OF_KEY_RIGHT:
+            if (myMouseRects.size() < 50) makeNewMouseRect();
+            break;
     }
     
 }
