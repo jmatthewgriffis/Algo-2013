@@ -30,8 +30,10 @@ void testApp::setup(){
     
     pct = 0;
     pctVel = 0.001f;
-    wideA = wide/2;
-    wideB = ofGetHeight();
+    wideA = wideC = wideE = wideG = wide/2;
+    tallA = tallC = tallE = tallG = tall/2;
+    wideB = wideD = wideF = wideH = 200;
+    tallB = tallD = tallF = tallH = 200;
     lineOffset = 35;
     top = lineOffset;
     bottom = ofGetHeight()-lineOffset;
@@ -69,7 +71,18 @@ void testApp::update(){
      }
      */
     
-    wideB = (ofGetHeight()/2-top) * 2;
+    // Upper-left rect
+    wideB = ofGetWidth()/2-left;
+    tallB = ofGetHeight()/2-top;
+    // Upper-right rect
+    wideD = right-ofGetWidth()/2;
+    tallD = ofGetHeight()/2-top;
+    // Lower-left rect
+    wideF = ofGetWidth()/2-left;
+    tallF = bottom-ofGetHeight()/2;
+    // Lower-right rect
+    wideH = right-ofGetWidth()/2;
+    tallH = bottom-ofGetHeight()/2;
     
     // Move finish lines under certain conditions:
     if (top1) if (top > 0) top -= lineVel;
@@ -205,11 +218,34 @@ void testApp::interpolateByPct(float myPct) {
     //    pct = powf(myPct, 3); // FIND ME--for some reason this is broken. Can't figure out why.
     
     // As described above, the actual manipulation of the position involves transforming it by a percentage of the destination and the opposite percentage of the origin. Furthermore we use an if statement to let the percentage reduce for a moment without changing the size of the rect, to make a pause before it grows again.
-    if ((1-pct) * wideA + pct * wideB >= wideA*2 && (1-pct) * wideA + pct * wideB <= wideB*0.9) {
+    // Upper-left rect
+    if ((1-pct) * wideA + pct * wideB >= wideA*2 && (1-pct) * wideA + pct * wideB <= wideB * 0.98) {
         wide = (1-pct) * wideA + pct * wideB;
     }
-    //    pos.y = (1-pct) * posA.y + pct * posB.y;
-    
+    if ((1-pct) * tallA + pct * tallB >= tallA*2 && (1-pct) * tallA + pct * tallB <= tallB * 0.98) {
+        tall = (1-pct) * tallA + pct * tallB;
+    }
+    // Upper-right rect
+    if ((1-pct) * wideC + pct * wideD >= wideC*2 && (1-pct) * wideC + pct * wideD <= wideD * 0.98) {
+        wide2 = (1-pct) * wideC + pct * wideD;
+    }
+    if ((1-pct) * tallC + pct * tallD >= tallC*2 && (1-pct) * tallC + pct * tallD <= tallD * 0.98) {
+        tall2 = (1-pct) * tallC + pct * tallD;
+    }
+    // Lower-left rect
+    if ((1-pct) * wideE + pct * wideF >= wideE*2 && (1-pct) * wideE + pct * wideF <= wideF * 0.98) {
+        wide3 = (1-pct) * wideE + pct * wideF;
+    }
+    if ((1-pct) * tallE + pct * tallF >= tallE*2 && (1-pct) * tallE + pct * tallF <= tallF * 0.98) {
+        tall3 = (1-pct) * tallE + pct * tallF;
+    }
+    // Lower-right rect
+    if ((1-pct) * wideG + pct * wideH >= wideG*2 && (1-pct) * wideG + pct * wideH <= wideH * 0.98) {
+        wide4 = (1-pct) * wideG + pct * wideH;
+    }
+    if ((1-pct) * tallG + pct * tallH >= tallG*2 && (1-pct) * tallG + pct * tallH <= tallH * 0.98) {
+        tall4 = (1-pct) * tallG + pct * tallH;
+    }
 }
 
 //--------------------------------------------------------------

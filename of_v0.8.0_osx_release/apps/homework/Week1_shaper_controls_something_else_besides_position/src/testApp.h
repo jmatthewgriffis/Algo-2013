@@ -28,7 +28,8 @@ public:
     ofPoint pos, pos2, pos3, pos4;
     float pct; // percentage
     float wide, wide2, wide3, wide4, tall, tall2, tall3, tall4;
-    int wideA, wideB;
+    float wideA, wideB, wideC, wideD, wideE, wideF, wideG, wideH;
+    float tallA, tallB, tallC, tallD, tallE, tallF, tallG, tallH;
 //    int hours, minutes, seconds, frames;
     float pctVel; // Speed at which percentage changes.
     int lineOffset;
