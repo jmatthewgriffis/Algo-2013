@@ -16,9 +16,10 @@ Rectangle::Rectangle(){
 }
 
 //--------------------------------------------------------------
-void Rectangle::setup(ofColor c) {
+void Rectangle::setup(ofColor c, float vel) {
     
     _c = c;
+    catchUpSpeed = vel;
     
 }
 
@@ -43,7 +44,7 @@ void Rectangle::xenoToPoint(float catchX, float catchY) {
     
     // This function, an example of Xeno's Paradox, moves the current location ever closer to the goal but never quite reaches it. It does this in a method similar to the interpolation function, using a percentage of the destination and the opposite percentage of the current location. However, where the interpolation function changed the percentage and kept the reference points consistent, this function keeps the percentage consistent and changes a reference point.
     
-    float catchUpSpeed = 0.03f; // "f" specifies a float, instead of a double or other decimal number.
+//    float catchUpSpeed = 0.03f; // "f" specifies a float, instead of a double or other decimal number.
     
     /*
      Here's why the total percentage in the equation must add up to 1(00), i.e. why we must multiply by catchUpSpeed in one case and by 1-catchUpSpeed in the other:

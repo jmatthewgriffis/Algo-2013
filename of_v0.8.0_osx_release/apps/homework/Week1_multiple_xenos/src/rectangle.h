@@ -14,7 +14,7 @@ class Rectangle {
 public:
     Rectangle();
     
-    void setup(ofColor c);
+    void setup(ofColor c, float vel);
     void update();
     void draw();
     
@@ -27,5 +27,6 @@ public:
     // ofPoints have an x and y pos.
     ofPoint pos;
     ofColor _c;
+    float catchUpSpeed;
 
 };
