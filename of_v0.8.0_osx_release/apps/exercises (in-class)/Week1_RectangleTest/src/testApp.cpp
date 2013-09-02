@@ -11,10 +11,10 @@ void testApp::setup(){
     myRect.pos.x = ofGetWindowWidth()/2;
     myRect.pos.y = ofGetWindowHeight()/2;
     
-    // Xeno origin
+    // Interpolate origin
     myRect.posA.x = 10;
     myRect.posA.y = 100;
-    // Xeno destination
+    // Interpolate destination
     myRect.posB.x = 500;
     myRect.posB.y = 340;
     
