@@ -26,5 +26,7 @@ class testApp : public ofBaseApp{
 //    CHALLENGE: make a series of xeno objects which follow the mouse, each at different rates. give them slightly different colors so that you can perceive them as independent objects. you will have to modify the rectangle object so that they can have unique colors.
     
     Rectangle myRects[numRects];
+    int offset; // How far away from the mouse are the rects?
+    bool surrounded;
 		
 };

@@ -8,20 +8,40 @@ void testApp::setup(){
     
     // Cool math note about Xeno's paradox: math proves that 0.99 repeating is equal to 1. Why? 1/3 is 0.33 repeating. Multiply that by 3 and you get 0.99 repeating. But 1/3 * 3 = 1. Therefore 0.99 repeating = 1.
     
+    // Setup the rects.
     for (int i = 0; i < numRects; i++) {
         myRects[i].setup(ofColor(50*i,50*(i*0.5),255-(15*i),255*0.5), ofRandom(0.01f, 0.07f));
         myRects[i].pos.x = ofRandom(0,ofGetWidth());
         myRects[i].pos.y = ofRandom(0,ofGetHeight());
     }
     
+    offset = 100;
+    surrounded = false;
+    
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
     
-    for (int i = 0; i < numRects; i++) {
-        myRects[i].xenoToPoint(mouseX, mouseY);
-    }
+    /*
+     0 -1/3, -1/3
+     1 0, -1/3
+     2 1/3, -1/3
+     3 -1/3, 0
+     4 1/3, 0
+     5 -1/3, 1/3
+     6 0, 1/3
+     7 1/3, 1/3
+     */
+    
+    myRects[0].xenoToPoint(mouseX-offset, mouseY-offset);
+    myRects[1].xenoToPoint(mouseX, mouseY-offset);
+    myRects[2].xenoToPoint(mouseX+offset, mouseY-offset);
+    myRects[3].xenoToPoint(mouseX-offset, mouseY);
+    myRects[4].xenoToPoint(mouseX+offset, mouseY);
+    myRects[5].xenoToPoint(mouseX-offset, mouseY+offset);
+    myRects[6].xenoToPoint(mouseX, mouseY+offset);
+    myRects[7].xenoToPoint(mouseX+offset, mouseY+offset);
     
 }
 
@@ -30,23 +50,39 @@ void testApp::draw(){
     
     ofBackground(50);
     
+    
+    // Tell the player what's up.
+    ofSetColor(255);
+    ofDrawBitmapString("r to reset  |  move the mouse", ofGetWidth()/2-110, 20);
+    
+    
+    // Draw the rects.
     for (int i = 0; i < numRects; i++) myRects[i].draw();
     
-    /*ofSetColor(255); // This is for the benefit of the text.
-    // Does this Xeno thing really work (i.e. never reach the goal)?
-    if (myRect1.pos.x == mouseX && myRect1.pos.y == mouseY) {
-        ofDrawBitmapString("Take that, Xeno!", ofPoint(myRect1.pos.x-50, myRect1.pos.y-50));
+    
+    // Rects can talk.
+    ofSetColor(255);
+    // Check if mouse is surrounded.
+    for (int i = 0; i < numRects; i++) {
+        if (ofDist(myRects[i].pos.x, myRects[i].pos.y, mouseX, mouseY) > offset*1.45) {
+            surrounded = false;
+            break; // If a rect is too far away, start the loop over.
+        }
+        else if (i == numRects-1) surrounded = true; // If i gets to the last value, consider the mouse surrounded.
     }
-    // Apparently it does.
-    else if (myRect1.pos.x >= mouseX-0.01 && myRect1.pos.x <= mouseX+0.01 && myRect1.pos.y >= mouseY-0.01 && myRect1.pos.y <= mouseY+0.01) {
-        ofDrawBitmapString("You win, Xeno.", ofPoint(myRect1.pos.x-50, myRect1.pos.y-50));
-    }*/
+    // Mouse is surrounded.
+    if (surrounded) ofDrawBitmapString("We have you surrounded!", ofPoint(myRects[1].pos.x-90, myRects[1].pos.y-50));
+    // Chase the mouse.
+    else {
+        ofDrawBitmapString("S/he's getting away! After, er, 'them'!", ofPoint(myRects[1].pos.x-90, myRects[1].pos.y-50));
+    }
     
 }
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
     
+    if (key == 'r') setup(); // Reset
 }
 
 //--------------------------------------------------------------
@@ -55,7 +91,7 @@ void testApp::keyReleased(int key){
 }
 
 //--------------------------------------------------------------
-void testApp::mouseMoved(int x, int y ){
+void testApp::mouseMoved(int x, int y){
     
 }
 
@@ -85,6 +121,6 @@ void testApp::gotMessage(ofMessage msg){
 }
 
 //--------------------------------------------------------------
-void testApp::dragEvent(ofDragInfo dragInfo){ 
+void testApp::dragEvent(ofDragInfo dragInfo){
     
 }
