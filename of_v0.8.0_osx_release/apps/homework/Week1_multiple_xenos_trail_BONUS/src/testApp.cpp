@@ -5,7 +5,7 @@ void testApp::makeNewRect(){
     
     // Create and set up a new rect.
     Rectangle myRect;
-    myRect.setup(ofColor(50,50,255,255*0.5));
+    myRect.setup(rect_c);
     myRect.pos.x = ofRandom(0, ofGetWidth());
     myRect.pos.y = ofRandom(0, ofGetHeight());
     myRects.push_back(myRect); // Add the rect to the vector.
@@ -17,7 +17,7 @@ void testApp::makeNewMouseRect(){
     
     // Create and set up a new rect.
     Rectangle myRect;
-    myRect.setup(ofColor(100,100,100,255*0.5));
+    myRect.setup(mouseRect_c);
     myRect.pos.x = ofRandom(0, ofGetWidth());
     myRect.pos.y = ofRandom(0, ofGetHeight());
     myMouseRects.push_back(myRect); // Add the rect to the vector.
@@ -35,6 +35,9 @@ void testApp::setup(){
     
     numInitRects = 1;
     numMouseRects = 5;
+    rect_c = ofColor(50,50,255,255*0.5);
+    mouseRect_c = ofColor(100,100,100,255*0.5);
+    collided_c = 0;
     angle = 0;
     rad = 100;
     rectTimer = 0;
@@ -74,7 +77,7 @@ void testApp::moveRects(){
         
         myRects[i].xenoToPoint(myRects[i-1].pos.x,myRects[i-1].pos.y);
         
-//        myRects[i].xenoToPoint(mouseX+i*10, mouseY-i*10); // Comment out the above and uncomment this for a cool 3D effect.
+        //        myRects[i].xenoToPoint(mouseX+i*10, mouseY-i*10); // Comment out the above and uncomment this for a cool 3D effect.
         
         // Also, calculate the distance from the center of the screen.
         float dist = ofDist(ofGetWidth()/2, ofGetHeight()/2, myRects[i].pos.x, myRects[i].pos.y);
@@ -101,6 +104,37 @@ void testApp::moveMouseRects(){
 }
 
 //--------------------------------------------------------------
+void testApp::whenRectsCollide(){
+    
+    // Reset the color (if I place this later the change during collision becomes permanent).
+    for (int i = 0; i < myRects.size(); i++) {
+        //        myRects[i]._c = rect_c;
+        myRects[i].colliding = false;
+    }
+    for (int j = 0; j < myMouseRects.size(); j++) {
+        myMouseRects[j]._c = mouseRect_c;
+    }
+    
+    // Collision detection! This compares each rect to all the rects in the other group, and if there's a collision, it changes the colliding rects' colors. The mouse rects revert after collision, while the orbiting rects switch color each collision.
+    for (int i = 0; i < myRects.size(); i++) {
+        for (int j = 0; j < myMouseRects.size(); j++) {
+            // Calculate the distance between the rects.
+            float dist = ofDist(myRects[i].pos.x, myRects[i].pos.y, myMouseRects[j].pos.x, myMouseRects[j].pos.y);
+            // If the distance is smaller than the combined radii, it's a collision, so change the color.
+            if (dist < myRects[0].wide) {
+                if (!myRects[i].colliding) {
+                    if (myRects[i]._c == rect_c) myRects[i]._c = collided_c;
+                    else myRects[i]._c = rect_c;
+                    myRects[i].colliding = true;
+                }
+                myMouseRects[j]._c = collided_c;
+            }
+        }
+    }
+    
+}
+
+//--------------------------------------------------------------
 void testApp::update(){
     
     angle++;
@@ -116,6 +150,7 @@ void testApp::update(){
     
     moveRects();
     moveMouseRects();
+    whenRectsCollide();
     
     // Following up the boolean function we created above, this oF function sorts the vector according to the values of the booleans and then removes any with a 'true' value:
     ofRemove(myRects,bShouldIErase);
@@ -125,7 +160,7 @@ void testApp::update(){
 //--------------------------------------------------------------
 void testApp::draw(){
     
-//    cout<<myRects.size()<<endl; // Debug vector size.
+    //    cout<<myRects.size()<<endl; // Debug vector size.
     
     ofBackground(50);
     

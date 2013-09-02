@@ -13,6 +13,7 @@ Rectangle::Rectangle(){
     
     ofSetRectMode(OF_RECTMODE_CENTER);
     offscreen = false;
+    wide = 40;
     
 }
 
@@ -35,7 +36,7 @@ void Rectangle::draw() {
     
     ofSetColor(_c);
     
-    ofRect(pos.x,pos.y,40,40);
+    ofRect(pos.x,pos.y,wide,wide);
     
 }
 

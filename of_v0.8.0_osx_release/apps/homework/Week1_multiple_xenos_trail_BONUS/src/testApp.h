@@ -34,6 +34,7 @@ public:
     vector<Rectangle> myMouseRects;
     int numInitRects; // Start with this many.
     int numMouseRects;
+    ofColor rect_c, mouseRect_c, collided_c;
     int angle; // Use for trig. rotation.
     int rectTimer; // Use to generate new rects.
     int rectRate; // How often to make a new rect.
