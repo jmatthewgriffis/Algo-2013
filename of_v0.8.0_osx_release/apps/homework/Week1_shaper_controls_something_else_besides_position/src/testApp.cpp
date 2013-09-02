@@ -155,7 +155,7 @@ void testApp::update(){
         
         // Tell the player what's up.
         ofSetColor(255);
-        ofDrawBitmapString("r to reset  |  WASD and ARROWS to be mean", ofGetWidth()/2-170, 20);
+        ofDrawBitmapString("r to reset  |  WASD / ARROWS to move the lines", ofGetWidth()/2-190, 20);
         
         //    ofDrawBitmapString(ofToString(pct), 50, 20); // Debug
         //    ofDrawBitmapString(ofToString(pctVel), 50, 50); // Debug
@@ -170,6 +170,9 @@ void testApp::update(){
         
         // Comment.
         ofDrawBitmapString(" Really wants it  |  Can't quite get it", ofGetWidth()/2-150, ofGetHeight()-10);
+        ofDrawBitmapString("WORLD", ofGetWidth()/4-30, ofGetHeight()/4);
+        ofDrawBitmapString("GROWTH", (ofGetWidth()/4)*3, ofGetHeight()/4);
+        ofDrawBitmapString("CHAMPIONSHIP", ofGetWidth()/2-55, ofGetHeight()-ofGetHeight()/4);
         
         // Display elapsed time.
         //    ofDrawBitmapString("Time: " + ofToString(hours) + ":" + ofToString(minutes) + ":" + ofToString(seconds) + ":" + ofToString(frames), ofGetWidth()/2-70, 50);
