@@ -8,43 +8,20 @@ void testApp::setup(){
     
     // Cool math note about Xeno's paradox: math proves that 0.99 repeating is equal to 1. Why? 1/3 is 0.33 repeating. Multiply that by 3 and you get 0.99 repeating. But 1/3 * 3 = 1. Therefore 0.99 repeating = 1.
     
-    /*
-    myRect.setup(ofColor(50,50,255,255*0.5));
-    myRect2.setup(ofColor(50,255,255,255*0.5));
-    myRect3.setup(ofColor(255,50,255,255*0.5));
-    myRect4.setup(ofColor(255,255,255,255*0.5));
-    
-    myRect.pos.x = ofGetWindowWidth()/2;
-    myRect.pos.y = ofGetWindowHeight()/2;
-    myRect2.pos.x = ofGetWindowWidth()/2;
-    myRect2.pos.y = ofGetWindowHeight()/2;
-    myRect3.pos.x = ofGetWindowWidth()/2;
-    myRect3.pos.y = ofGetWindowHeight()/2;
-    myRect4.pos.x = ofGetWindowWidth()/2;
-    myRect4.pos.y = ofGetWindowHeight()/2;
-     */
-    
     for (int i = 0; i < numRects; i++) {
         Rectangle myRect;
         myRect.setup(ofColor(50,50,255,255*0.5));
         myRects.push_back(myRect);
     }
-//    myEnemy.setup();
-//    enemies.push_back(myEnemy);
     
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
     
-    /*
-    myRect.xenoToPoint(mouseX, mouseY);
-    myRect2.xenoToPoint(mouseX-10, mouseY+20);
-    myRect3.xenoToPoint(mouseX+25, mouseY-65);
-    myRect4.xenoToPoint(mouseX-40, mouseY+50);
-     */
-    
+    // First rect follows the mouse.
     myRects[0].xenoToPoint(mouseX, mouseY);
+    // Each successive rect follows the one before.
     for (int i = 1; i < myRects.size(); i++) {
 //        myRects[i].xenoToPoint(mouseX+i*10, mouseY-i*10); // Cool 3D effect
         myRects[i].xenoToPoint(myRects[i-1].pos.x,myRects[i-1].pos.y);
@@ -55,15 +32,9 @@ void testApp::update(){
 //--------------------------------------------------------------
 void testApp::draw(){
     
-    cout<<myRects.size()<<endl;
+//    cout<<myRects.size()<<endl; // Debug vector size.
     
     ofBackground(50);
-    /*
-    myRect.draw();
-    myRect2.draw();
-    myRect3.draw();
-    myRect4.draw();
-     */
     
     for (int i = 0; i < myRects.size(); i++) {
         myRects[i].draw();
@@ -71,17 +42,14 @@ void testApp::draw(){
     
     ofSetColor(255); // This is for the benefit of the text.
     
-    /*
-    
     // Does this Xeno thing really work (i.e. never reach the goal)?
-    if (myRect.pos.x == mouseX && myRect.pos.y == mouseY) {
-        ofDrawBitmapString("Take that, Xeno!", ofPoint(myRect.pos.x-50, myRect.pos.y-50));
+    if (myRects[0].pos.x == mouseX && myRects[0].pos.y == mouseY) {
+        ofDrawBitmapString("Take that, Xeno!", ofPoint(myRects[0].pos.x-50, myRects[0].pos.y-50));
     }
     // Apparently it does.
-    else if (myRect.pos.x >= mouseX-0.01 && myRect.pos.x <= mouseX+0.01 && myRect.pos.y >= mouseY-0.01 && myRect.pos.y <= mouseY+0.01) {
-        ofDrawBitmapString("You win, Xeno.", ofPoint(myRect.pos.x-50, myRect.pos.y-50));
+    else if (myRects[0].pos.x >= mouseX-0.01 && myRects[0].pos.x <= mouseX+0.01 && myRects[0].pos.y >= mouseY-0.01 && myRects[0].pos.y <= mouseY+0.01) {
+        ofDrawBitmapString("You win, Xeno.", ofPoint(myRects[0].pos.x-50, myRects[0].pos.y-50));
     }
-     */
 }
 
 //--------------------------------------------------------------
