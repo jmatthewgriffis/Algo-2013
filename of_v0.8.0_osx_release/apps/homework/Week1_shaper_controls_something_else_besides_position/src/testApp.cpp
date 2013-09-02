@@ -7,9 +7,19 @@ void testApp::setup(){
     ofSetRectMode(OF_RECTMODE_CENTER);
     ofSetFrameRate(60);
     
-    wide = 50;
-    pos.x = ofGetWidth()/2;
-    pos.y = ofGetHeight()/2;
+    wide = wide2 = wide3 = wide4 = tall = tall2 = tall3 = tall4 = 25;
+    // Upper-left rect
+    pos.x = ofGetWidth()/2-wide/4;
+    pos.y = ofGetHeight()/2-tall/4;
+    // Upper-right rect
+    pos2.x = ofGetWidth()/2+wide2/4;
+    pos2.y = ofGetHeight()/2-tall2/4;
+    // Lower-left rect
+    pos3.x = ofGetWidth()/2-wide3/4;
+    pos3.y = ofGetHeight()/2+tall3/4;
+    // Lower-right rect
+    pos4.x = ofGetWidth()/2+wide4/4;
+    pos4.y = ofGetHeight()/2+tall4/4;
     /*
      frames = 0;
      hours = 0;
@@ -27,7 +37,8 @@ void testApp::setup(){
     bottom = ofGetHeight()-lineOffset;
     left = lineOffset;
     right = ofGetWidth()-lineOffset;
-    lineVel = 5;
+    lineVel = 3;
+    top1 = top2 = bottom1 = bottom2 = left1 = left2 = right1 = right2 = false;
     
 }
 
@@ -41,7 +52,7 @@ void testApp::update(){
     if (pct > 1 || pct < 0) pctVel *= -1; // Prevent the percentage from going out of bounds.
     //    if (pct > 1) pct = 0;
     interpolateByPct(pct);
-
+    
     /*
      // Update the clock:
      if (frames >= 60) {
@@ -59,6 +70,30 @@ void testApp::update(){
      */
     
     wideB = (ofGetHeight()/2-top) * 2;
+    
+    // Move finish lines under certain conditions:
+    if (top1) if (top > 0) top -= lineVel;
+    if (top2) if (top < ofGetHeight()/2 - wideA*4) top += lineVel;
+    if (bottom1) if (bottom > ofGetHeight()/2 + wideA*4) bottom -= lineVel;
+    if (bottom2) if (bottom < ofGetHeight()) bottom += lineVel;
+    if (left1) if (left > 0) left -= lineVel;
+    if (left2) if (left < ofGetWidth()/2 - wideA*4) left += lineVel;
+    if (right1) if (right > ofGetWidth()/2 + wideA*4) right -= lineVel;
+    if (right2) if (right < ofGetWidth()) right += lineVel;
+    
+    // Update position based on changing dimensions:
+    // Upper-left rect
+    pos.x = ofGetWidth()/2-wide/2;
+    pos.y = ofGetHeight()/2-tall/2;
+    // Upper-right rect
+    pos2.x = ofGetWidth()/2+wide2/2;
+    pos2.y = ofGetHeight()/2-tall2/2;
+    // Lower-left rect
+    pos3.x = ofGetWidth()/2-wide3/2;
+    pos3.y = ofGetHeight()/2+tall3/2;
+    // Lower-right rect
+    pos4.x = ofGetWidth()/2+wide4/2;
+    pos4.y = ofGetHeight()/2+tall4/2;
     
 }
 
@@ -88,9 +123,16 @@ void testApp::draw(){
     // Display elapsed time.
     //    ofDrawBitmapString("Time: " + ofToString(hours) + ":" + ofToString(minutes) + ":" + ofToString(seconds) + ":" + ofToString(frames), ofGetWidth()/2-70, 50);
     
-    // Draw our heroic rectangle.
+    // Draw our heroic rectangle. It is composed of four rectangles so we can adjust the growth in all directions. Would be cleaner to use a class but don't want to take the time right now.
     ofSetColor(120,75,240);
-    ofRect(pos.x, pos.y, wide, wide);
+    // Upper-left
+    ofRect(pos.x, pos.y, wide, tall);
+    // Upper-right
+    ofRect(pos2.x, pos2.y, wide2, tall2);
+    // Lower-left
+    ofRect(pos3.x, pos3.y, wide3, tall3);
+    //Lower-right
+    ofRect(pos4.x, pos4.y, wide4, tall4);
     
     //---------------------
     // Finally, draw the finish lines (def. cleaner to do this with a class but don't want to take the time right now).
@@ -98,9 +140,9 @@ void testApp::draw(){
     ofSetLineWidth(8);
     
     // LEFT
-    ofLine(lineOffset, 0, lineOffset, ofGetHeight());
+    ofLine(left, 0, left, ofGetHeight());
     ofPushMatrix();
-    ofTranslate(0, 17);
+    ofTranslate(left-lineOffset, 17);
     ofDrawBitmapString("F", ofPoint(50, ofGetHeight()/2-50));
     ofDrawBitmapString("I", ofPoint(50, ofGetHeight()/2-35));
     ofDrawBitmapString("N", ofPoint(50, ofGetHeight()/2-20));
@@ -110,9 +152,9 @@ void testApp::draw(){
     ofPopMatrix();
     
     // RIGHT
-    ofLine(ofGetWidth()-lineOffset, 0, ofGetWidth()-lineOffset, ofGetHeight());
+    ofLine(right, 0, right, ofGetHeight());
     ofPushMatrix();
-    ofTranslate(ofGetWidth()-110, 17);
+    ofTranslate(right+lineOffset-110, 17);
     ofDrawBitmapString("F", ofPoint(50, ofGetHeight()/2-50));
     ofDrawBitmapString("I", ofPoint(50, ofGetHeight()/2-35));
     ofDrawBitmapString("N", ofPoint(50, ofGetHeight()/2-20));
@@ -134,9 +176,9 @@ void testApp::draw(){
     ofPopMatrix();
     
     // BOTTOM
-    ofLine(0, ofGetHeight()-lineOffset, ofGetWidth(), ofGetHeight()-lineOffset);
+    ofLine(0, bottom, ofGetWidth(), bottom);
     ofPushMatrix();
-    ofTranslate(0, ofGetHeight()-100);
+    ofTranslate(0, bottom+lineOffset-100);
     ofDrawBitmapString("F", ofPoint(ofGetWidth()/2-50, 50));
     ofDrawBitmapString("I", ofPoint(ofGetWidth()/2-35, 50));
     ofDrawBitmapString("N", ofPoint(ofGetWidth()/2-20, 50));
@@ -179,19 +221,88 @@ void testApp::keyPressed(int key){
             setup(); // Reset
             break;
             
+            // Move the finish lines:
+            
+            // Top
         case 'w':
         case 'W':
-            if (top > 0) top -= lineVel;
+            top1 = true;
             break;
         case 's':
         case 'S':
-            if (top < ofGetHeight()/2 - wideA*4) top += lineVel;
+            top2 = true;
+            break;
+            
+            // Bottom
+        case OF_KEY_UP:
+            bottom1 = true;
+            break;
+        case OF_KEY_DOWN:
+            bottom2 = true;
+            break;
+            
+            // Left
+        case 'a':
+        case 'A':
+            left1 = true;
+            break;
+        case 'd':
+        case 'D':
+            left2 = true;
+            break;
+            
+            // Right
+        case OF_KEY_LEFT:
+            right1 = true;
+            break;
+        case OF_KEY_RIGHT:
+            right2 = true;
             break;
     }
 }
 
 //--------------------------------------------------------------
 void testApp::keyReleased(int key){
+    
+    switch (key) {
+            // Stop moving the finish lines:
+            
+            // Top
+        case 'w':
+        case 'W':
+            top1 = false;
+            break;
+        case 's':
+        case 'S':
+            top2 = false;
+            break;
+            
+            // Bottom
+        case OF_KEY_UP:
+            bottom1 = false;
+            break;
+        case OF_KEY_DOWN:
+            bottom2 = false;
+            break;
+            
+            // Left
+        case 'a':
+        case 'A':
+            left1 = false;
+            break;
+        case 'd':
+        case 'D':
+            left2 = false;
+            break;
+            
+            // Right
+        case OF_KEY_LEFT:
+            right1 = false;
+            break;
+        case OF_KEY_RIGHT:
+            right2 = false;
+            break;
+    }
     
 }
 

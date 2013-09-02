@@ -25,13 +25,14 @@ public:
     void interpolateByPct(float myPct);
     
     // ofPoints have an x and y pos.
-    ofPoint pos;
+    ofPoint pos, pos2, pos3, pos4;
     float pct; // percentage
-    float wide;
+    float wide, wide2, wide3, wide4, tall, tall2, tall3, tall4;
     int wideA, wideB;
 //    int hours, minutes, seconds, frames;
     float pctVel; // Speed at which percentage changes.
     int lineOffset;
     int top, bottom, left, right, lineVel; // These locate the finish lines.
+    bool top1, top2, bottom1, bottom2, left1, left2, right1, right2; // These allow movement.
     
 };
