@@ -24,7 +24,8 @@ void Rectangle::xenoToPoint(float catchX, float catchY){
 
 void Rectangle::draw(){
     
-    ofSetColor(255,0,0);
+    // Use the changing position of the rect to shift its color. By dividing its y pos by the window height, it produces a normalized result, i.e. something between 0 and 1.
+    ofSetColor(255.0 * (pos.y / ofGetWindowHeight()),0,0);
     ofRect(pos.x, pos.y, 20, 20);
     
 }

@@ -3,6 +3,9 @@
 //--------------------------------------------------------------
 void testApp::setup(){
 
+    ofSetBackgroundAuto(false); // Prevents the background from auto-refreshing.
+    ofEnableAlphaBlending(); // Must enable this to allow any transparency.
+    
     for (int i = 0; i < 5; i++) {
         // Could also use ++i notation; this is different in that it increments i after the for loop has been evaluated, not before. DOUBLE-CHECK THIS.
         Rectangle tmpRect;
@@ -32,6 +35,23 @@ void testApp::update(){
 
 //--------------------------------------------------------------
 void testApp::draw(){
+    
+    // Let's try to color the background (which we've set not to refresh) and make it transparent.
+    
+    // First attempt doesn't work for some reason.
+//    ofBackground(100, 100, 100, 255.0 * 0.1);
+    
+    // Define a shade of gray. This results in trails from the rects and the background retaining all the trails.
+//    ofColor semiTransparent(100, 100, 100, 255.0 * 0.1);
+    
+    // On the other hand, with this white, the rects still produce trails but the background doesn't retain them permanently.
+    ofColor semiTransparent(255, 255.0 * 0.1);
+    
+    // Now set the color so we can use it.
+    ofSetColor(semiTransparent);
+    
+    // Finally, draw a rect to be the "background." We have to adjust the coordinates to reflect that the rectMode is CENTER.
+    ofRect(ofGetWindowWidth()/2, ofGetWindowHeight()/2, ofGetWindowWidth(), ofGetWindowHeight());
 
 //    myRect.draw();
     
