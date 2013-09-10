@@ -11,6 +11,7 @@ void testApp::setup(){
     groundOffset = 20;
     vel = 0;
     gravity = (9.8/60); // Divide meters per second by 60 frames per second.
+    friction = 0.7;
     onGround = false;
 
 }
@@ -20,16 +21,14 @@ void testApp::update(){
     
     // If the ball reaches the "ground," prevent it from moving lower and note that it's on the ground.
     if (pos.y >= ofGetWindowHeight()-groundOffset-rad) {
-//        onGround = true;
+        onGround = true;
         pos.y = ofGetWindowHeight()-groundOffset-rad;
-        vel *= -0.9; // Bounce and lose some force to friction.
+        vel *= -friction; // Bounce and lose some force to friction.
     }
-//    else onGround = false;
+    else onGround = false;
     
     vel += gravity; // Modify the velocity every frame by gravity.
     pos.y += vel; // And modify the position every frame by the velocity.
-        
-//    if (onGround) vel = 0; // Set vel to zero if the ball is on the ground.
     
 }
 
@@ -44,7 +43,10 @@ void testApp::draw(){
     ofLine(0, ofGetWindowHeight()-groundOffset, ofGetWindowWidth(), ofGetWindowHeight()-groundOffset);
     
     // Debug--draw the velocity.
-    ofDrawBitmapStringHighlight(ofToString(vel), ofPoint(10,10));
+    ofDrawBitmapStringHighlight("vel = " + ofToString(vel), ofPoint(10,10));
+    
+    // Explain gravity controls.
+    ofDrawBitmapStringHighlight("gravity = " + ofToString(gravity*60) + " meters per second | use UP and DOWN to change the gravity. | CLICK to launch the stopped ball.", ofPoint(100, ofGetWindowHeight()-10));
 
 }
 
@@ -53,6 +55,8 @@ void testApp::keyPressed(int key){
 
     // Reset
     if (key == 'r') setup();
+    if (key == OF_KEY_UP) gravity += (0.1/60);
+    if (key == OF_KEY_DOWN) gravity -= (0.1/60);
     
 }
 
@@ -74,7 +78,7 @@ void testApp::mouseDragged(int x, int y, int button){
 //--------------------------------------------------------------
 void testApp::mousePressed(int x, int y, int button){
 
-//    if (onGround) vel = -100;
+    if (onGround) vel = ofRandom(-20, -5); // Must be still.
     
 }
 
