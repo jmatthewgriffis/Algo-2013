@@ -5,16 +5,11 @@ void testApp::setup(){
     
     ofSetVerticalSync(true);
     ofBackground(0);
-    ofSetCircleResolution(100);
-    
-    radius = 50.0;
     
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
-    
-    radius += 0.1;
     
 }
 
@@ -31,25 +26,27 @@ void testApp::draw(){
     }ofEndShape();*/
     
     float angle = ofGetElapsedTimef() * 3.5;
-    float x = radius * cos(angle);
-    float y = radius * sin(angle);
+    float radius = 200.0;
     
-    ofPoint pos;
-    pos.x = x;
-    pos.y = y;
-    pointList.push_back(pos);
-    if (pointList.size() > 1000) pointList.erase(pointList.begin());
+    // Got the ratio(s) from Wikipedia for Lissajus Curves. These particular numbers Charlie found and they produce a square, more or less. Try messing with the numbers!
+    float x = radius * cos(angle * 3.4);
+    float y = radius * sin(angle * 4.7);
+    
+    ofPoint tmpPt;
+    tmpPt.x = x;
+    tmpPt.y = y;
+    pointList.push_back(tmpPt);
+    
+    // Control the vector size.
+    if (pointList.size() > 400) pointList.erase(pointList.begin());
     
     ofPushMatrix();{
         
         ofTranslate(ofGetWindowSize()/2);
-        ofSetColor(255, 0, 255);
         
-        ofFill();
-        ofCircle(pos, 20);
-        
-        ofSetColor(255);
         ofNoFill();
+        ofSetColor(255);
+        
         ofBeginShape();{
             
             for (int i = 0; i < pointList.size(); i++) ofVertex(pointList[i]);

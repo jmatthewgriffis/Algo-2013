@@ -20,6 +20,5 @@ class testApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
     
     vector<ofPoint> pointList;
-    float radius;
 		
 };
