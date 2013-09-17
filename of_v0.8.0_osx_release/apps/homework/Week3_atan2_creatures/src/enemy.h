@@ -14,7 +14,7 @@ class Enemy {
 public:
     Enemy();
     
-    void update(float _angle);
+    void update();
     void draw(ofPoint mousePos);
 
 ofPoint pos;

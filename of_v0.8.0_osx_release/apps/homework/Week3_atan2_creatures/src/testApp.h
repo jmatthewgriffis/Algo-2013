@@ -3,6 +3,8 @@
 #include "ofMain.h"
 #include "enemy.h"
 
+#define numEnemies 9
+
 class testApp : public ofBaseApp{
     
 public:
@@ -20,6 +22,6 @@ public:
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
     
-    Enemy myEnemy;
+    vector<Enemy> enemyList;
     
 };

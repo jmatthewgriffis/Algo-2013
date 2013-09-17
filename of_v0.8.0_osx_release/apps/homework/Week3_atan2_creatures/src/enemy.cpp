@@ -17,9 +17,9 @@ Enemy::Enemy(){
 }
 
 //--------------------------------------------------------------
-void Enemy::update(float _angle){
+void Enemy::update(){
     
-    angle = _angle;
+    angle++;
     pos.x = dist * sin(ofDegToRad(angle));
     pos.y = dist * cos(ofDegToRad(angle));
 }

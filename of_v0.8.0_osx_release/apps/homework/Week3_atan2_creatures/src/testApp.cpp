@@ -6,18 +6,28 @@ void testApp::setup(){
     ofSetVerticalSync(true);
     ofSetFrameRate(60);
     ofBackground(0);
+    
+    for (int i = 0; i < numEnemies; i++) {
+        Enemy tmpEnemy;
+        tmpEnemy.angle = 360/numEnemies*i;
+        enemyList.push_back(tmpEnemy);
+    }
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
-
-    myEnemy.update(0);
+    
+    for (int i = 0; i < enemyList.size(); i++) {
+        enemyList[i].update();
+    }
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){
 
-    myEnemy.draw(ofPoint(mouseX, mouseY));
+    for (int i = 0; i < enemyList.size(); i++) {
+        enemyList[i].draw(ofPoint(mouseX, mouseY));
+    }
 }
 
 //--------------------------------------------------------------
