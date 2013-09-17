@@ -18,6 +18,6 @@ public:
     void draw(ofPoint mousePos);
 
 ofPoint pos;
-float rad, angle, dist;
+float rad, angle, angle2, dist;
 
 };
