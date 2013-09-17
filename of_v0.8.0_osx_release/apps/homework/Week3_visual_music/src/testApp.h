@@ -25,7 +25,7 @@ public:
     
     vector<Rectangle> rectList;
     float rectOffset; // Space between rects.
-//    float amplitudeX;
+    //    float amplitudeX;
     float amplitudeY;
     float period;
     ofPoint pos;
