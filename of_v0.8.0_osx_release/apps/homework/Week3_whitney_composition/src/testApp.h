@@ -23,7 +23,10 @@ public:
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
     
+    
+    // CHALLENGE: Make a composition using animation techniques that is inspired by John Whitney. Think of how he used timing repitition and creating big moments in his works.
     vector<Rectangle> rectList;
     float rectOffset; // Space between rects.
+    bool colorChanged;
     
 };

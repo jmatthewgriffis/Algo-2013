@@ -16,6 +16,8 @@ Rectangle::Rectangle(){
     wide = ofGetWindowWidth();
     tall = wide * 0.75;
     pos.x = pos.y = 0;
+    
+    c = ofColor(50, 255, 50, 255*0.5);
 
 }
 
@@ -31,8 +33,7 @@ void Rectangle::draw() {
     
     ofEnableAlphaBlending();
     
-    ofSetColor(50, 255, 50, 255*0.5);
-    //    ofSetHexColor(0xFFFFFF); // EXAMPLE: Also an option for color.
+    ofSetColor(c);
     
     ofRect(pos.x,pos.y,wide,tall);
     

@@ -7,6 +7,7 @@ void testApp::setup(){
     ofSetFrameRate(60);
     ofBackground(0);
     
+    colorChanged = false;
     rectOffset = 10;
     
     // Create a vector of 9 rects, arranged in a 3 x 3 grid which is centered.
@@ -33,7 +34,19 @@ void testApp::update(){
     
     for (int i = 0; i < rectList.size(); i++) {
         
-        rectList[i].wide--; // Shrink the rects.
+        // Change color first.
+        if (!colorChanged) {
+            
+            if (rectList[i].c.g > 0) rectList[i].c.g--;
+            else if (rectList[i].c.b < 255) rectList[i].c.b++;
+            else if (rectList[i].c.r < 255) {
+                rectList[i].c.r++;
+                rectList[i].c.b--;
+            }
+            else colorChanged = true;
+        }
+        
+        else rectList[i].wide--; // Shrink the rects.
         rectList[i].tall = rectList[i].wide * 0.75; // Keep them proportional.
         
         // Need to recalculate the pos as per setup to keep rects centered.

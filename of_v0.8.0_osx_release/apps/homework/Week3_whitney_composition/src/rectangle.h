@@ -30,4 +30,6 @@ public:
     float pct; // percentage
     
     float wide, tall;
+    
+    ofColor c;
 };
