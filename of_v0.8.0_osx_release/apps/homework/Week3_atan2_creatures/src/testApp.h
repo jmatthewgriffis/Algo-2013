@@ -22,6 +22,8 @@ public:
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
     
+    // CHALLENGE: Use atan2 in conjunction with some mouse follow code (xeno) or the previous vector/acceleration work and create a creature that follows a point. Think os using sin/cos to give it living characteristics based on it's motion. (think of more subtle motions of creatures, breathing, blinking, leg motion, etc)
+    
     vector<Enemy> enemyList;
     
 };

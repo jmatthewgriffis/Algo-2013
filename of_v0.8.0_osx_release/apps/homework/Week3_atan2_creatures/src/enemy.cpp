@@ -15,6 +15,7 @@ Enemy::Enemy(){
     rad = 20;
     angle = angle2 = 0;
     dist = 200;
+
 }
 
 //--------------------------------------------------------------
@@ -38,6 +39,15 @@ void Enemy::draw(ofPoint mousePos){
         ofLine(pos.x-rad*2, pos.y, pos.x+rad*2, pos.y);
         ofLine(pos.x, pos.y-rad*2, pos.x, pos.y+rad*2);
         ofCircle(pos, rad);
+        
+        leftEye.pos = ofPoint( pos.x-3, pos.y-3 );
+        rightEye.pos = ofPoint( pos.x+3, pos.y-3 );
+        
+        leftEye.mousePos = mousePos;
+        rightEye.mousePos = mousePos;
+        
+        leftEye.draw();
+        rightEye.draw();
         
     }ofPopMatrix();
 }
