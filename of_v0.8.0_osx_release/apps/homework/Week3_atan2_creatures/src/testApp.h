@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
+#include "enemy.h"
 
 class testApp : public ofBaseApp{
     
@@ -19,12 +20,6 @@ public:
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
     
-    // CHALLENGE: Use sin / cos to emulate a natural phenomenon. Post a picture or video of what your phenomenon is along with you application.
-    float amplitudeY;
-    ofPoint pos;
-    int posVel;
-    ofColor background;
-    float rad;
-    float angle, angleVel;
+    Enemy myEnemy;
     
 };
