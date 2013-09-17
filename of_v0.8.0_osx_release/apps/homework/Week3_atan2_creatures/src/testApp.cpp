@@ -5,7 +5,7 @@ void testApp::setup(){
 
     ofSetVerticalSync(true);
     ofSetFrameRate(60);
-    ofBackground(0);
+    ofBackground(255);
     
     for (int i = 0; i < numEnemies; i++) {
         Enemy tmpEnemy;
@@ -24,7 +24,7 @@ void testApp::update(){
 
 //--------------------------------------------------------------
 void testApp::draw(){
-
+    
     for (int i = 0; i < enemyList.size(); i++) {
         enemyList[i].draw(ofPoint(mouseX, mouseY));
     }
