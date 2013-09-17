@@ -11,10 +11,10 @@
 //--------------------------------------------------------------
 Rectangle::Rectangle(){
     
-//    ofSetRectMode(OF_RECTMODE_CENTER);
+    ofSetRectMode(OF_RECTMODE_CENTER);
     
-    wide = 100;
-    tall = 200;
+    wide = 200;
+    tall = wide * 0.75;
     pos.x = pos.y = 0;
 
 }

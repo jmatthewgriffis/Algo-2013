@@ -4,7 +4,7 @@
 
 #include "rectangle.h"
 
-#define numRects 50
+#define numRects 9
 
 class testApp : public ofBaseApp{
     
@@ -25,13 +25,5 @@ public:
     
     vector<Rectangle> rectList;
     float rectOffset; // Space between rects.
-//    float amplitudeX;
-    float amplitudeY;
-    float period;
-    ofPoint pos;
-    int posVel;
-    ofColor background;
-    float rad;
-    float heightVel;
     
 };

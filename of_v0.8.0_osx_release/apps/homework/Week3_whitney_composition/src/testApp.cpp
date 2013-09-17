@@ -5,77 +5,39 @@ void testApp::setup(){
     
     ofSetVerticalSync(true);
     ofSetFrameRate(60);
-    background = 0;
-    ofBackground(background);
+    ofBackground(0);
     
     rectOffset = 10;
     
     for (int i = 0; i < numRects; i++) {
-        Rectangle tmpRect; // Create a temp rect.
-        tmpRect.wide = (ofGetWindowWidth()-(rectOffset * (numRects+1)))/numRects; // Size it so it will be centered along with the other rects.
-        tmpRect.pos.x = rectOffset*(i+1) + tmpRect.wide*i; // Position it so it will be centered along with the other rects.
-        tmpRect.pos.y = ofGetWindowHeight()/2 + tmpRect.tall/2; // Vertically centered.
-        rectList.push_back(tmpRect); // Add it to the vector.
-        
+        Rectangle tmpRect;
+        if (i < 3) {
+            tmpRect.pos.x = rectOffset * (i+1) + tmpRect.wide * i + tmpRect.wide/2;
+            tmpRect.pos.y = rectOffset + tmpRect.tall/2;
+        }
+        else if (i < 6) {
+            tmpRect.pos.x = rectOffset * (i-2) + tmpRect.wide * (i-3) + tmpRect.wide/2;
+            tmpRect.pos.y = rectOffset * 2 + tmpRect.tall * 1.5;
+        }
+        else {
+            tmpRect.pos.x = rectOffset * (i-5) + tmpRect.wide * (i-6) + tmpRect.wide/2;
+            tmpRect.pos.y = rectOffset * 3 + tmpRect.tall * 2.5;
+        }
+        rectList.push_back(tmpRect);
     }
-    
-    //    amplitudeX = ofGetWindowWidth()/2;
-    amplitudeY = 100;
-    period = 500.0;
-    
-    pos.x = 0;
-    posVel = 7;
-    rad = 0;
-    
-    heightVel = 10;
-    
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
     
-    pos.x += posVel; // Move the sin ball.
-    if (pos.x >= ofGetWindowWidth() || pos.x <= 0) posVel *= -1; // Make it bounce off the walls.
-    
-    // CODE CHUNK: Use the sin ball to adjust the height of the rects.
-    for (int i = 0; i < rectList.size(); i++) {
-        
-        float goalY = pos.y + rad + ofGetWindowHeight()/2;
-        
-        // Check if sin ball is above or below specific rect.
-        if (pos.x > rectList[i].pos.x - rectList[i].wide/2 && pos.x < rectList[i].pos.x + rectList[i].wide/2) {
-            
-            if (rectList[i].pos.y > goalY) {
-                
-                rectList[i].tall += heightVel; // If so, adjust the rect's height to touch the ball.
-                rectList[i].pos.y -= heightVel; // Also shift the pos so it looks like the rect is holding position and just getting taller.
-            }
-            else if (rectList[i].pos.y < goalY) {
-                
-                rectList[i].tall -= heightVel; // Ditto.
-                rectList[i].pos.y += heightVel;
-            }
-        }
-    } // END CHUNK
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){
     
     for (int i = 0; i < rectList.size(); i++) {
-        rectList[i].draw(); // Draw the vector.
+        rectList[i].draw();
     }
-    
-    ofPushMatrix();{
-        
-        ofSetColor(255);
-        ofTranslate(0, ofGetWindowHeight()/2);
-        pos.y = amplitudeY * sin((ofGetElapsedTimeMillis() / period) * TWO_PI);
-        ofCircle(pos, rad);
-        
-    }ofPopMatrix();
-    
-    ofDrawBitmapString("Daft Punk--Steam Machine  |  r to restart the machine", ofPoint(0, ofGetWindowHeight()));
     
 }
 
