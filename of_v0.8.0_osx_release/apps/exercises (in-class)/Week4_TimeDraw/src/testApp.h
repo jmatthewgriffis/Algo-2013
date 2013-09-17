@@ -22,5 +22,8 @@ class testApp : public ofBaseApp{
     
     vector<TimePoint> points;
     float startTime;
+    float playbackStartTime;
+    bool bIsRecording;
+    ofPoint getPositionForTime(float time);
 		
 };

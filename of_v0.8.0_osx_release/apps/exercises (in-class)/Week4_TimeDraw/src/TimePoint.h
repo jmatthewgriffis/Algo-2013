@@ -16,6 +16,7 @@ public:
     TimePoint();
 //    TimePoint(){}; // Could also write the entire function here (thus not needing to put it in the CPP file) but that is bad practice.
     
-    float x, y, z;
+    float x, y;
+    float t;
     
 };
