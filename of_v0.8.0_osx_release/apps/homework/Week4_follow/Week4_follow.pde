@@ -13,8 +13,6 @@ void draw() {
   
   background(0);
   
-//  myRect.update();
-  
   myRect.xenoToPoint(mouseX, mouseY);
   
   myRect.draw();

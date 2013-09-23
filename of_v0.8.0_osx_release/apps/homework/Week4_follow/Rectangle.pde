@@ -18,15 +18,6 @@ class Rectangle {
     tall = wide;
   }
 
-  void update() {
-
-    leftEye.x = x-100;
-    leftEye.y = y-25;
-    rightEye.x = x+100;
-    rightEye.y = y-25;
-    
-  }
-
   void draw() {
 
     fill(50, 50, 255);
