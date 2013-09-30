@@ -18,7 +18,6 @@ Particle::Particle() {
     soClose = wide*2;
     randomMove = true;
     c = ofColor(255);
-    claustrophobe = false;
     
 }
 
@@ -32,10 +31,12 @@ void Particle::setup() {
     vel.x = ofRandom(-1, 1) * speed;
     vel.y = ofRandom(-1, 1) * speed;
     
-    if (ofRandom(1) > 0.5f) {
-        attract = true;
-    }else {
-        attract = false;
+    if (ofRandom(1) < 0.4f) {
+        behavior = 0; // neutral
+    }else if (ofRandom(1) >= 0.4f && ofRandom(1) < 0.8f) {
+        behavior = 1; // attracted
+    }else if (ofRandom(1) >= 0.8f) {
+        behavior = 2; // repelled
     }
     
 }
@@ -70,18 +71,12 @@ void Particle::update() {
         
     }
     
-    // Get lonely after a while:
-    if (!attract) {
-        if (ofRandom(1) < 0.001) {
-            attract = true;
-        }
+    // Change behavior after a while:
+    if (ofRandom(1) < 0.001) {
+        behavior++;
     }
-    
-    // Get sick of company after a while:
-    if (claustrophobe) {
-        if (ofRandom(1) < 0.001) {
-            attract = false;
-        }
+    if (behavior > 2) {
+        behavior = 0;
     }
     
     /*

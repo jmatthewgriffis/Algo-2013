@@ -26,8 +26,7 @@ public:
     float soClose;
     
     bool randomMove;
-    bool attract;
-    bool claustrophobe;
+    int behavior; // 0 = neutral; 1 = attracted; 2 = repelled.
     
     ofColor c;
 };

@@ -40,12 +40,12 @@ void testApp::update(){
                     particleList[i].randomMove = false;
                     float pct = 0.03;
                     // If particle is attracted...
-                    if (particleList[i].attract) {
+                    if (particleList[i].behavior == 1) {
                         particleList[i].c = ofColor(0,255,0);
                         // Move toward and follow the other particle.
                         particleList[i].pos = (1-pct)*particleList[i].pos + pct*particleList[j].pos;
-                        particleList[i].claustrophobe = true;
-                    }else { // Not attracted? Move away!
+//                        particleList[i].claustrophobe = true; // Increased likelihood to become repelled.
+                    }else if (particleList[i].behavior == 2) { // Repelled?
                         particleList[i].c = ofColor(255,0,0);
                         //particleList[i].pos -= (1-pct)*particleList[j].pos - pct*particleList[i].pos; // Uncomment this for a cool effect when you hold the restart button.
                         particleList[i].pos += (particleList[i].soClose-dist);
