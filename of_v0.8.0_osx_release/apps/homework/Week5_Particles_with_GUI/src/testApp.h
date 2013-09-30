@@ -22,6 +22,8 @@ class testApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
     
+    // CHALLENGE: 1. Use ofxGui and build a particle system that has at least 3 adjustable parameters.  Tweak them to find 3 different sets of parameters that you really like and make a note of the settings in the comments of your program, or save them out in separate xml files.
+    
     void addParticle();
     
     vector<Particle> particleList;
