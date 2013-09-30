@@ -21,5 +21,11 @@ public:
     ofVec2f pos;
     ofVec2f vel;
     int speed;
+//    int angle;
     int wide, tall;
+    
+    bool randomMove;
+    bool attract;
+    
+    ofColor c;
 };
