@@ -43,6 +43,8 @@ void Particle::setup() {
 
 void Particle::update() {
     
+    tall = wide;
+    
     pos += vel; // Move the particle.
     
     // If the particle goes offscreen, Pac-Man it to the other side:

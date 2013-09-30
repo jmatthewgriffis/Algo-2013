@@ -10,10 +10,13 @@ void testApp::setup(){
     
     gui = new ofxUICanvas(); // Here we use the pointer to actually create an instance of the class. This does fill ("allocate") the reserved memory, and unless we free it later, it will remain filled until we reboot the computer. It doesn't happen automatically when we close the app. This is called a "memory leak."
     
-    gui->addLabel("My Controls");
+    gui->addLabel("Particles Are Life");
     gui->addSpacer();
-    gui->addButton("myButton", false, 40, 40);
-    gui->addSlider("radius", 0, 100, 50);
+    gui->addSlider("Biggosity", 1, 50, 20);
+    gui->addSpacer();
+    gui->addSlider("Close Enough", 1, 100, 40);
+    gui->addSpacer();
+    gui->addButton("Click for Change", false, 15, 15);
     
     gui->loadSettings("myGuiSettings.xml");
     
@@ -22,7 +25,6 @@ void testApp::setup(){
     for (int i = 0; i < initParticles; i++) {
         addParticle();
     }
-    
 }
 
 //--------------------------------------------------------------
@@ -37,13 +39,22 @@ void testApp::onGuiEvent( ofxUIEventArgs &e ) {
     
 //    cout << "I got a message" << e.getName() << endl;
     
-    if ( e.getName() == "radius" ) {
+    if ( e.getName() == "Biggosity" ) {
         ofxUISlider *radiusSlider = (ofxUISlider*)e.widget;
-        
-//        radius = radiusSlider->getScaledValue();
-    }else if (e.getName() == "myButton" ) {
-        ofxUIButton *b = (ofxUIButton*)e.widget;
-        b->getValue();
+        for (int i = 0; i < particleList.size(); i++) {
+            particleList[i].wide = radiusSlider->getScaledValue();
+        }
+    }else if (e.getName() == "Close Enough" ) {
+        ofxUISlider *radiusSlider = (ofxUISlider*)e.widget;
+        for (int i = 0; i < particleList.size(); i++) {
+            particleList[i].soClose = radiusSlider->getScaledValue();
+        }
+    }else if (e.getName() == "Click for Change" ) {
+//        ofxUIButton *b = (ofxUIButton*)e.widget;
+//        b->getValue();
+        for (int i = 0; i < particleList.size(); i++) {
+            particleList[i].behavior++;
+        }
     }
 }
 
