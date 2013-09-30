@@ -23,9 +23,11 @@ public:
     int speed;
 //    int angle;
     int wide, tall;
+    float soClose;
     
     bool randomMove;
     bool attract;
+    bool claustrophobe;
     
     ofColor c;
 };

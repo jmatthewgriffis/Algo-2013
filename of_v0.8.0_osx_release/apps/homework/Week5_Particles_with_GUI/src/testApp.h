@@ -3,7 +3,7 @@
 #include "ofMain.h"
 #include "Particle.h"
 
-#define initParticles 20
+#define initParticles 50
 
 class testApp : public ofBaseApp{
 
@@ -25,7 +25,5 @@ class testApp : public ofBaseApp{
     void addParticle();
     
     vector<Particle> particleList;
-    
-    float soClose;
 		
 };

@@ -13,10 +13,12 @@ Particle::Particle() {
     ofSetRectMode(OF_RECTMODE_CENTER);
     speed = 2;
     //    angle = 0;
-    wide = 40;
+    wide = 20;
     tall = wide;
+    soClose = wide*2;
     randomMove = true;
     c = ofColor(255);
+    claustrophobe = false;
     
 }
 
@@ -66,6 +68,20 @@ void Particle::update() {
             vel.y = ofRandom(-1, 1) * speed;
         }
         
+    }
+    
+    // Get lonely after a while:
+    if (!attract) {
+        if (ofRandom(1) < 0.001) {
+            attract = true;
+        }
+    }
+    
+    // Get sick of company after a while:
+    if (claustrophobe) {
+        if (ofRandom(1) < 0.001) {
+            attract = false;
+        }
     }
     
     /*

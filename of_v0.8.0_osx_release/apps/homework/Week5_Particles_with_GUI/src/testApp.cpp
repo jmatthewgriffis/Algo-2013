@@ -12,8 +12,6 @@ void testApp::setup(){
         addParticle();
     }
     
-    soClose = 100;
-    
 }
 
 void testApp::addParticle() {
@@ -38,7 +36,7 @@ void testApp::update(){
             if (i != j) {
                 // If particles get close enough...
                 float dist = (particleList[i].pos - particleList[j].pos).length();
-                if (dist < soClose) {
+                if (dist < particleList[i].soClose) {
                     particleList[i].randomMove = false;
                     float pct = 0.03;
                     // If particle is attracted...
@@ -46,10 +44,11 @@ void testApp::update(){
                         particleList[i].c = ofColor(0,255,0);
                         // Move toward and follow the other particle.
                         particleList[i].pos = (1-pct)*particleList[i].pos + pct*particleList[j].pos;
+                        particleList[i].claustrophobe = true;
                     }else { // Not attracted? Move away!
                         particleList[i].c = ofColor(255,0,0);
                         //particleList[i].pos -= (1-pct)*particleList[j].pos - pct*particleList[i].pos; // Uncomment this for a cool effect when you hold the restart button.
-                        particleList[i].pos += (soClose-dist);
+                        particleList[i].pos += (particleList[i].soClose-dist);
                     }
                 }else {
                     particleList[i].randomMove = true;
