@@ -8,12 +8,46 @@ void testApp::setup(){
     ofBackground(0);
     ofEnableAlphaBlending();
     
+    gui = new ofxUICanvas(); // Here we use the pointer to actually create an instance of the class. This does fill ("allocate") the reserved memory, and unless we free it later, it will remain filled until we reboot the computer. It doesn't happen automatically when we close the app. This is called a "memory leak."
+    
+    gui->addLabel("My Controls");
+    gui->addSpacer();
+    gui->addButton("myButton", false, 40, 40);
+    gui->addSlider("radius", 0, 100, 50);
+    
+    gui->loadSettings("myGuiSettings.xml");
+    
+    ofAddListener( gui->newGUIEvent, this, &testApp::onGuiEvent);
+    
     for (int i = 0; i < initParticles; i++) {
         addParticle();
     }
     
 }
 
+//--------------------------------------------------------------
+void testApp::exit() {
+    
+    gui->saveSettings("myGuiSettings.xml");
+    delete gui; // Here we make sure to delete the gui, which frees up the allocated memory. Memory leak: avoided.
+}
+
+//--------------------------------------------------------------
+void testApp::onGuiEvent( ofxUIEventArgs &e ) {
+    
+//    cout << "I got a message" << e.getName() << endl;
+    
+    if ( e.getName() == "radius" ) {
+        ofxUISlider *radiusSlider = (ofxUISlider*)e.widget;
+        
+//        radius = radiusSlider->getScaledValue();
+    }else if (e.getName() == "myButton" ) {
+        ofxUIButton *b = (ofxUIButton*)e.widget;
+        b->getValue();
+    }
+}
+
+//--------------------------------------------------------------
 void testApp::addParticle() {
     
     Particle tmp;
