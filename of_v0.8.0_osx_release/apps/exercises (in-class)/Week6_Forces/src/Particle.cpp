@@ -31,11 +31,11 @@ void Particle::update() {
     pos += vel;
     
     // Bounce off the walls.
-    if ( pos.x < 0 || pos.x < ofGetScreenWidth() ) {
+    if ( pos.x < 0 || pos.x > ofGetWindowWidth() ) {
         
         vel.x *= -1;
     }
-    if ( pos.y < 0 || pos.y < ofGetScreenHeight() ) {
+    if ( pos.y < 0 || pos.y > ofGetWindowHeight() ) {
         
         vel.y *= -1;
     }
