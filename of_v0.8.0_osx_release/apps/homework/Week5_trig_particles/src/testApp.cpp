@@ -19,8 +19,8 @@ void testApp::update(){
     }
     
     // Limit vector size.
-    if (particleList.size() > 2) {
-        particleList.erase(particleList.begin(), particleList.begin()+1);
+    if (particleList.size() > 4) {
+        particleList.erase(particleList.begin(), particleList.begin()+3);
     }
     
 }
@@ -81,12 +81,7 @@ void testApp::mousePressed(int x, int y, int button){
         
         // Make a particle and add it to the vector.
         Particle tmp;
-        tmp.setup(angle, vec);
-        // Choose one of three angles.
-        if ( i == 1 ) {
-            tmp.rotateVel *= -1;
-            tmp.maxAngle = angle - 90;
-        }
+        tmp.setup(angle, vec, i);
         particleList.push_back(tmp);
         
     }

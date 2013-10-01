@@ -12,7 +12,7 @@ Particle::Particle() {
     
 }
 
-void Particle::setup( float _angle, ofVec2f _vec ) {
+void Particle::setup( float _angle, ofVec2f _vec, int _i ) {
     
     vec = _vec;
     
@@ -23,11 +23,19 @@ void Particle::setup( float _angle, ofVec2f _vec ) {
     
     // Motion
     minAngle = _angle;
-    maxAngle = minAngle + 90;
     angle = minAngle;
+    angleDiff = int(ofRandom( 45, 135 ));
     rotateRad = 50;
     rotateVel = 3;
-    incRad = 5;
+    incRad = ofRandom( 1, 5 );
+    
+    // Even-numbered elements go one way, odd, the other.
+    if ( ( _i + 2 ) % 2 == 0 ) {
+        rotateVel *= -1;
+        maxAngle = angle - angleDiff;
+    }else {
+        maxAngle = angle + angleDiff;
+    }
     
 }
 
@@ -35,7 +43,11 @@ void Particle::update() {
 
     if (angle != maxAngle) {
         angle += rotateVel;
-        rotateRad += incRad;
+        float diff = abs(angle - maxAngle);
+//        float pct = (angle / maxAngle);
+        cout<<diff<<endl;
+        if (diff >= angleDiff/2) rotateRad += incRad;
+        else rotateRad -= incRad;
     }
     
     pos.x = sin(ofDegToRad(angle)) * rotateRad;
@@ -45,7 +57,7 @@ void Particle::update() {
 
 void Particle::draw() {
     
-    ofCircle( ofGetWindowSize()/2 - vec.normalize() * 100 , 10);
+//    ofCircle( ofGetWindowSize()/2 - vec.normalize() * 100 , 10); // Debug.
     
     ofPushMatrix();{
         ofSetColor( c );
