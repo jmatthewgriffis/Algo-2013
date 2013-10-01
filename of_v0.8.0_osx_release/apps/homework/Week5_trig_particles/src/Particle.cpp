@@ -21,13 +21,13 @@ void Particle::setup( float _angle, ofVec2f _vec, int _i ) {
     wide = 20;
     tall = wide*1.5;
     
-    // Motion
+    // MOTION
     minAngle = _angle;
     angle = minAngle;
     angleDiff = int(ofRandom( 45, 135 ));
     rotateRad = 50;
     rotateVel = 3;
-    incRad = ofRandom( 1, 5 );
+    incRad = ofRandom( 1, 20 );
     
     // Even-numbered elements go one way, odd, the other.
     if ( ( _i + 2 ) % 2 == 0 ) {
@@ -41,11 +41,9 @@ void Particle::setup( float _angle, ofVec2f _vec, int _i ) {
 
 void Particle::update() {
 
-    if (angle != maxAngle) {
+    if ( ( rotateVel > 0 && angle + rotateVel <= maxAngle ) || ( rotateVel < 0 && angle + rotateVel >= maxAngle ) ) {
         angle += rotateVel;
         float diff = abs(angle - maxAngle);
-//        float pct = (angle / maxAngle);
-        cout<<diff<<endl;
         if (diff >= angleDiff/2) rotateRad += incRad;
         else rotateRad -= incRad;
     }

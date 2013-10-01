@@ -3,51 +3,37 @@
 //--------------------------------------------------------------
 void testApp::setup(){
     
-    // The usual oF setup stuff.
     ofSetVerticalSync(true);
-    ofSetFrameRate(60);
-    ofBackground(0);
     
+    for ( int i = 0; i < 100; i ++ ) {
+        Particle p;
+        p.mass = ofRandom( 0.2, 3.0 );
+        particleList.push_back( p );
+    }
+    
+    ofBackground( 0 );
+    ofEnableAlphaBlending();
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
     
-    // Update the particles.
-    for (int i = 0; i < particleList.size(); i++) {
-        particleList[i].update();
-    }
+    ofVec2f gravity( 0.0, 0.1 );
+    ofVec2f wind( 0.1, 0.0 );
     
-    /*
-    // Limit vector size.
-    if (particleList.size() > 4) {
-        particleList.erase(particleList.begin(), particleList.begin()+3);
+    for ( int i = 0; i < particleList.size(); i++ ) {
+        particleList[i].applyForce( gravity );
+        particleList[i].applyForce( wind );
     }
-     */
-    
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){
     
-    // Draw the particles.
-    for (int i = 0; i < particleList.size(); i++) {
-        particleList[i].draw();
-    }
-    
-    // Draw a line from the center to the mouse.
-    ofLine(ofGetWindowSize()/2, ofPoint(mouseX, mouseY));
-    
 }
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
-    
-    // Reset button.
-    if (key == 'r') {
-        particleList.clear();
-        setup();
-    }
     
 }
 
@@ -68,25 +54,6 @@ void testApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void testApp::mousePressed(int x, int y, int button){
-    
-    for (int i = 0; i < numParticles; i++) {
-        
-        // Calculate the angle for particle generation.
-        float dx = mouseX - ofGetWindowWidth()/2;
-        float dy = mouseY - ofGetWindowHeight()/2;
-        ofVec2f vec = ofVec2f( dx,dy );
-        
-//        angle = - ofRadToDeg(atan2( dy, dx )); // Right.
-        angle = 90 - ofRadToDeg(atan2( dy, dx )); // Top.
-//        angle = 180 - ofRadToDeg(atan2( dy, dx )); // Left.
-//        angle = 270 - ofRadToDeg(atan2( dy, dx )); // Bottom.
-        
-        // Make a particle and add it to the vector.
-        Particle tmp;
-        tmp.setup(angle, vec, i);
-        particleList.push_back(tmp);
-        
-    }
     
 }
 

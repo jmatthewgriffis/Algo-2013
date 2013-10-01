@@ -3,8 +3,6 @@
 #include "ofMain.h"
 #include "Particle.h"
 
-#define numParticles 10
-
 class testApp : public ofBaseApp{
 
 	public:
@@ -21,9 +19,6 @@ class testApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-    
-    float angle; // Store the angle of the vector of motion.
-    
+
     vector<Particle> particleList;
-		
 };
