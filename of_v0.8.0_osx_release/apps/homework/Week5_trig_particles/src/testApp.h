@@ -3,6 +3,8 @@
 #include "ofMain.h"
 #include "Particle.h"
 
+#define numParticles 2
+
 class testApp : public ofBaseApp{
 
 	public:

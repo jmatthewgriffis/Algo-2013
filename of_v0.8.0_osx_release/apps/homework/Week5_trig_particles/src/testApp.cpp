@@ -2,7 +2,7 @@
 
 //--------------------------------------------------------------
 void testApp::setup(){
-
+    
     // The usual oF setup stuff.
     ofSetVerticalSync(true);
     ofSetFrameRate(60);
@@ -12,22 +12,22 @@ void testApp::setup(){
 
 //--------------------------------------------------------------
 void testApp::update(){
-
+    
     // Update the particles.
     for (int i = 0; i < particleList.size(); i++) {
-        particleList[i].update(angle);
+        particleList[i].update();
     }
     
     // Limit vector size.
-    if (particleList.size() > 3) {
-        particleList.erase(particleList.begin());
+    if (particleList.size() > 2) {
+        particleList.erase(particleList.begin(), particleList.begin()+1);
     }
     
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){
-
+    
     // Draw the particles.
     for (int i = 0; i < particleList.size(); i++) {
         particleList[i].draw();
@@ -46,55 +46,69 @@ void testApp::keyPressed(int key){
         particleList.clear();
         setup();
     }
-
+    
 }
 
 //--------------------------------------------------------------
 void testApp::keyReleased(int key){
-
+    
 }
 
 //--------------------------------------------------------------
 void testApp::mouseMoved(int x, int y ){
-
+    
 }
 
 //--------------------------------------------------------------
 void testApp::mouseDragged(int x, int y, int button){
-
+    
 }
 
 //--------------------------------------------------------------
 void testApp::mousePressed(int x, int y, int button){
     
-    // Calculate the angle for particle generation.
-    float dx = mouseX - ofGetWindowWidth()/2;
-    float dy = mouseY - ofGetWindowHeight()/2;
-    angle = atan2( dy, dx );
+    for (int i = 0; i < numParticles; i++) {
+        
+        // Calculate the angle for particle generation.
+        float dx = mouseX - ofGetWindowWidth()/2;
+        float dy = mouseY - ofGetWindowHeight()/2;
+        ofVec2f vec = ofVec2f( dx,dy );
+        
+//        angle = - ofRadToDeg(atan2( dy, dx )); // Right.
+        angle = 90 - ofRadToDeg(atan2( dy, dx )); // Top.
+//        angle = 180 - ofRadToDeg(atan2( dy, dx )); // Left.
+//        angle = 270 - ofRadToDeg(atan2( dy, dx )); // Bottom.
+        
+        // Make a particle and add it to the vector.
+        Particle tmp;
+        tmp.setup(angle, vec);
+        // Choose one of three angles.
+        if ( i == 1 ) {
+            tmp.rotateVel *= -1;
+            tmp.maxAngle = angle - 90;
+        }
+        particleList.push_back(tmp);
+        
+    }
     
-    // Make a particle and add it to the vector.
-    Particle tmp;
-    tmp.setup();
-    particleList.push_back(tmp);
-
 }
 
 //--------------------------------------------------------------
 void testApp::mouseReleased(int x, int y, int button){
-
+    
 }
 
 //--------------------------------------------------------------
 void testApp::windowResized(int w, int h){
-
+    
 }
 
 //--------------------------------------------------------------
 void testApp::gotMessage(ofMessage msg){
-
+    
 }
 
 //--------------------------------------------------------------
 void testApp::dragEvent(ofDragInfo dragInfo){ 
-
+    
 }
