@@ -24,7 +24,7 @@ void Card::setup() {
     
     c = ofColor( 255 );
     
-    wide = 50.0;
+    wide = 75.0;
     tall = wide * 1.25f;
     
 }

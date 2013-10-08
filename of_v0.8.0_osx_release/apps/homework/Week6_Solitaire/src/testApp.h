@@ -21,5 +21,9 @@ class testApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
     
     Card myCard;
+    
+    void drawCardPos();
+    
+    ofVec2f posDeck, posDiamond, posHeart, posSpade, posClub;
 		
 };
