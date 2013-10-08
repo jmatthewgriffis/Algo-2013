@@ -18,8 +18,8 @@ void Card::setup() {
     
     pos.x = 400;
     pos.y = 100;
-    vel.x = -2;
-    vel.y = 0;
+    vel.x = ofRandom( -4, -1 );
+    vel.y = ofRandom( 0, -5 );
     accel.x = accel.y = 0;
     
     c = ofColor( 255 );
@@ -61,7 +61,7 @@ void Card::update() {
 
 //------------------
 void Card::draw() {
-    cout<<vel.y<<endl;
+    
     ofSetRectMode( OF_RECTMODE_CENTER );
     ofFill();
     ofSetColor( c );
