@@ -28,4 +28,6 @@ class Particle {
     ofVec2f damping;  // could also be a ofVec2f
     
     ofVec2f lastPos;
+    
+    float slowDownRadius;
 };

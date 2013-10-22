@@ -18,13 +18,30 @@ void testApp::setup(){
     ofBackground(0);
 }
 
+void testApp::heyWatchWhereYoureGoing() {
+    
+    // This function prevents the cars from running into each other. It works very simply, by calculating the difference in their position and apply a perpendicular force outward (i.e. away from the other car) if the distance is too small.
+    if ( car_blue.pos.distance( car_red.pos ) < car_blue.slowDownRadius / 2 ) {
+        ofVec2f away = car_blue.pos - car_red.pos;
+        away.normalize();
+        car_blue.addForce( away );
+        car_red.addForce( -away );
+    }
+    // This results in "twitch" if the destinations get too close (the cars can't get closer but are still seeking the destination so they get stuck) so it's necessary to address that situation as well, in this case by moving one of the destinations.
+    if ( dest_blue.distance( dest_red ) < car_blue.slowDownRadius / 1.5 ) {
+        dest_red = ofVec2f( ofRandomWidth(), ofRandomHeight() );
+    }
+}
+
 //--------------------------------------------------------------
 void testApp::update(){
 
     car_blue.seek( dest_blue );
-    car_blue.update();
-    
     car_red.seek( dest_red );
+    
+    heyWatchWhereYoureGoing();
+    
+    car_blue.update();
     car_red.update();
 
     // I didn't know this was a method for distance; cool!

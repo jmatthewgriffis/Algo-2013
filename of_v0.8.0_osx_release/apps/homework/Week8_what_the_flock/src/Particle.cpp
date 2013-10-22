@@ -18,6 +18,8 @@ void Particle::setParams( ofVec2f _pos, ofVec2f _vel ){
     vel.set( _vel );
     
     lastPos.set( pos );
+    
+    slowDownRadius = 200.0;
 }
 
 void Particle::addForce( ofVec2f force ){
@@ -27,8 +29,6 @@ void Particle::addForce( ofVec2f force ){
 void Particle::seek( ofVec2f dest ) {
     float maxSpeed = 10.0;
     float maxForce = 0.4;
-    
-    float slowDownRadius = 200.0;
     
     ofVec2f desired = dest - pos;
     
