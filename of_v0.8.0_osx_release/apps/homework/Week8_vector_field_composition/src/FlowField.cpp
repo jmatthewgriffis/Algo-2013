@@ -43,7 +43,7 @@ void FlowField::setPerlin() {
     for( int y=0; y<flowList.size(); y++){
         for( int x=0; x<flowList[y].size(); x++){
             float noise = ofMap( ofNoise(x*0.05, y*0.05), 0, 1, 0, TWO_PI);
-            flowList[y][x].set( ofVec2f( cos(noise) * 20.0, sin(noise) * 20.0 ) );
+            flowList[y][x].set( ofVec2f( cos(noise) * ofRandom( 10.0, 30.0 ), sin(noise) * ofRandom( 10.0, 30.0 ) ) );
         }
     }
 }

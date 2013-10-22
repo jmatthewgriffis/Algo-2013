@@ -22,4 +22,6 @@ class Particle {
     void applyForce( ofVec2f force );
     void update();
     void draw();
+    
+    ofColor c;
 };

@@ -2,7 +2,17 @@
 
 //--------------------------------------------------------------
 void testApp::setup(){
+    
+    // Maintenance
+    ofSetVerticalSync( true );
+    ofSetFrameRate( 60 );
+    ofEnableAlphaBlending();
+    
+    vectorAlpha = 0;
+    vectorAlphaVel = 0.5;
+    
     myField.setup( ofGetWindowWidth(), ofGetWindowHeight(), 20 );
+    myField.setPerlin();
     
     particleList.clear();
     
@@ -22,6 +32,12 @@ void testApp::addParticle() {
 
 //--------------------------------------------------------------
 void testApp::update(){
+    
+    vectorAlpha += vectorAlphaVel;
+    if ( vectorAlpha < 0 || vectorAlpha > 50 ) {
+        vectorAlphaVel *= -1;
+    }
+    
     myField.update();
     
     for( int i=0; i<particleList.size(); i++ ){
@@ -32,10 +48,9 @@ void testApp::update(){
 
 //--------------------------------------------------------------
 void testApp::draw(){
-    ofSetColor(255);
+    ofSetColor(255, int( vectorAlpha ) );
     myField.draw();
     
-    ofSetColor(0, 255, 255);
     for( int i=0; i<particleList.size(); i++ ){
         particleList[i].draw();
     }
@@ -67,13 +82,17 @@ void testApp::mouseMoved(int x, int y ){
 //--------------------------------------------------------------
 void testApp::mouseDragged(int x, int y, int button){
     
+    // Add some chaos with a click.
+    myField.addRepelForce(x, y, 200, 200.0);
     
+    /*
     if( button == OF_MOUSE_BUTTON_1 ){
 //        myField.addRepelForce(x, y, 100, 2.0);
         myField.addCircularForce(x, y, 300, 2.0);
     }else{
         myField.addAttractForce(x, y, 100, 2.0);
     }
+     */
 }
 
 //--------------------------------------------------------------

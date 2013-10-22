@@ -24,7 +24,12 @@ class testApp : public ofBaseApp{
     
     // NOTE: springboarding off Charlie's repo example for time efficiency's sake.
     
+    // ORDER FROM CHAOS
+    // Watch to see it emerge. Click to dam the river of time.
+    
     void addParticle();
+    
+    float vectorAlpha, vectorAlphaVel;
     
     FlowField           myField;
     vector<Particle>    particleList;
