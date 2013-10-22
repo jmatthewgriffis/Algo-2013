@@ -192,9 +192,9 @@
 			children = (
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				CB258303180345CF002A587C /* FlowField.cpp */,
+				CB258304180345CF002A587C /* FlowField.h */,
 				CB25830A1803B2F4002A587C /* Particle.cpp */,
 				CB25830B1803B2F4002A587C /* Particle.h */,
-				CB258304180345CF002A587C /* FlowField.h */,
 				E4B69E1E0A3A1BDC003C02F2 /* testApp.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* testApp.h */,
 			);
