@@ -10,7 +10,7 @@
 
 Particle::Particle() {
 //    setParams(0,0,0);
-    damping = ofVec2f( 0.01f );
+    damping = ofVec2f( 0.03f );
 }
 
 void Particle::setParams( ofVec2f _pos, ofVec2f _vel ){
@@ -52,7 +52,7 @@ void Particle::update() {
     vel = vel + acc;
     pos = pos + vel;
     
-    vel *= 0.97;
+    vel -= damping;
     
     acc *= 0;
     

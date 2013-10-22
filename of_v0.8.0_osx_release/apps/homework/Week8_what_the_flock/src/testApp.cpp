@@ -7,10 +7,13 @@ void testApp::setup(){
     ofSetVerticalSync(true);
     ofSetFrameRate(60);
 
-    pos = ofGetWindowSize() / 2;
-    dest = ofVec2f( ofRandomWidth(), ofRandomHeight() );
-
-    car.setParams( pos, ofVec2f(10, -5) );
+    // Blue car.
+    car_blue.setParams( ofVec2f( ofRandomWidth(), ofRandomHeight() ), ofVec2f( 10, -5 ) );
+    dest_blue = ofVec2f( ofRandomWidth(), ofRandomHeight() );
+    
+    // Red car.
+    car_red.setParams( ofVec2f( ofRandomWidth(), ofRandomHeight() ), ofVec2f( 10, -5 ) );
+    dest_red = ofVec2f( ofRandomWidth(), ofRandomHeight() );
 
     ofBackground(0);
 }
@@ -18,26 +21,44 @@ void testApp::setup(){
 //--------------------------------------------------------------
 void testApp::update(){
 
-    car.seek( dest );
-    car.update();
+    car_blue.seek( dest_blue );
+    car_blue.update();
+    
+    car_red.seek( dest_red );
+    car_red.update();
 
-    if( car.pos.distance(dest) < 5){
-        dest = ofVec2f( ofRandomWidth(), ofRandomHeight() );
+    // I didn't know this was a method for distance; cool!
+    if( car_blue.pos.distance(dest_blue) < 5){
+        dest_blue = ofVec2f( ofRandomWidth(), ofRandomHeight() );
+    }
+    
+    if( car_red.pos.distance(dest_red) < 5){
+        dest_red = ofVec2f( ofRandomWidth(), ofRandomHeight() );
     }
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){
-    ofSetColor(255);
-    car.draw();
+    ofSetColor( 0, 0, 255 );
+    car_blue.draw();
+    
+    ofSetColor( 255, 0, 0 );
+    car_red.draw();
 
+    ofSetColor(0,0,255);
+    ofCircle( dest_blue, 4 );
+    
     ofSetColor(255,0,0);
-    ofCircle( dest, 4 );
+    ofCircle( dest_red, 4 );
 }
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
 
+    // reset
+    if ( key == 'r' ) {
+        setup();
+    }
 }
 
 //--------------------------------------------------------------

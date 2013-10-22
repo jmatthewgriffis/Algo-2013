@@ -25,6 +25,6 @@ class testApp : public ofBaseApp{
     // NOTE: springboarding off Charlie's repo example for time efficiency's sake.
     
     ofVec2f pos, vel;
-    ofVec2f dest;
-    Particle car;
+    ofVec2f dest_blue, dest_red;
+    Particle car_blue, car_red;
 };
