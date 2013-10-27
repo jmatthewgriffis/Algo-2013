@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		CD5F02531816E47000E28324 /* Boid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD5F02511816E47000E28324 /* Boid.cpp */; };
+		CD5F02561816E84E00E28324 /* FlockController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD5F02541816E84E00E28324 /* FlockController.cpp */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
 		E45BE97C0E8CC7DD009D7055 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */; };
@@ -64,6 +65,8 @@
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		CD5F02511816E47000E28324 /* Boid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Boid.cpp; sourceTree = "<group>"; };
 		CD5F02521816E47000E28324 /* Boid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Boid.h; sourceTree = "<group>"; };
+		CD5F02541816E84E00E28324 /* FlockController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FlockController.cpp; sourceTree = "<group>"; };
+		CD5F02551816E84E00E28324 /* FlockController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlockController.h; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
 		E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
@@ -192,6 +195,8 @@
 				CD5F02511816E47000E28324 /* Boid.cpp */,
 				CD5F02521816E47000E28324 /* Boid.h */,
 				E4B69E1F0A3A1BDC003C02F2 /* testApp.h */,
+				CD5F02541816E84E00E28324 /* FlockController.cpp */,
+				CD5F02551816E84E00E28324 /* FlockController.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -295,6 +300,7 @@
 				CD5F02531816E47000E28324 /* Boid.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* testApp.cpp in Sources */,
+				CD5F02561816E84E00E28324 /* FlockController.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
