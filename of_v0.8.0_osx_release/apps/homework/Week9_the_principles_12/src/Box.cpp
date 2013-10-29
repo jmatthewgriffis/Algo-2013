@@ -10,7 +10,7 @@
 
 Box::Box() {
     
-    friction = 0.97;
+    friction = 0.8;
 }
 
 void Box::setup() {
@@ -18,6 +18,7 @@ void Box::setup() {
     pos.set( ofGetWindowSize() / 2 );
     vel.set( 0, 0 );
     acc.set( 0 );
+    force.set( 0 );
 }
 
 void Box::update() {
@@ -26,12 +27,16 @@ void Box::update() {
     pos += vel;
     
     vel *= friction;
-    float minSpeed = 0.02;
+    float minSpeed = 0.2;
     if ( vel.lengthSquared() < minSpeed * minSpeed ) {
         vel.set( 0 );
     }
     
     acc.set( 0 );
+    
+    if ( vel.lengthSquared() == 0 && force.lengthSquared() != 0 ) {
+        applyForce( force );
+    }
 }
 
 void Box::draw() {
@@ -41,16 +46,14 @@ void Box::draw() {
     ofRect( pos, 100, 100 );
 }
 
-void Box::applyForce( ofVec2f force ) {
+void Box::applyForce( ofVec2f _force ) {
     
-    anticipation( force );
-    
-    if ( vel == ofVec2f( 0, 0 ) ) {
-        acc += force;
-    }
+    acc += _force;
+    force.set( 0 );
 }
 
-void Box::anticipation( ofVec2f force ) {
+void Box::anticipation( ofVec2f _force ) {
     
-    acc -= force / 5;
+    acc -= _force * 0.25;
+    force.set( _force );
 }

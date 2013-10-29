@@ -17,10 +17,10 @@ public:
     void update();
     void draw();
     
-    void applyForce( ofVec2f force );
-    void anticipation( ofVec2f force );
+    void applyForce( ofVec2f _force );
+    void anticipation( ofVec2f _force );
     
-    ofVec2f pos, vel, acc;
+    ofVec2f pos, vel, acc, force;
     
     float friction;
 };

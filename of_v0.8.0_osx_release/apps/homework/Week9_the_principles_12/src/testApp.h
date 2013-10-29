@@ -21,4 +21,9 @@ public:
     void gotMessage(ofMessage msg);
     
     Box myBox;
+    
+    float vel, yPos;
+    
+    bool allowChange;
+    
 };
