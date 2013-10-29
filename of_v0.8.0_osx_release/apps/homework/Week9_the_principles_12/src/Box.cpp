@@ -19,6 +19,7 @@ void Box::setup() {
     vel.set( 0, 0 );
     acc.set( 0 );
     force.set( 0 );
+    allowScooch = true;
 }
 
 void Box::update() {
@@ -30,6 +31,7 @@ void Box::update() {
     float minSpeed = 0.2;
     if ( vel.lengthSquared() < minSpeed * minSpeed ) {
         vel.set( 0 );
+        allowScooch = true;
     }
     
     acc.set( 0 );

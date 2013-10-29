@@ -10,7 +10,7 @@ void testApp::setup(){
     
     vel = 15.0;
     yPos = ofGetHeight() - 50;
-    allowChange = true;
+    allowChange = scoochMode = true;
     
     myBox.setup();
     myBox.pos.y = yPos;
@@ -31,9 +31,15 @@ void testApp::update(){
         allowChange = true;
     }
     
-    if ( ofGetElapsedTimeMillis() % 50 == 0 ) {
-        myBox.anticipation( ofVec2f( vel, 0.0 ) );
+    if ( scoochMode ) {
+        if ( ofGetElapsedTimeMillis() % 50 == 0 ) {
+            if ( myBox.allowScooch ) {
+                myBox.anticipation( ofVec2f( vel, 0.0 ) );
+                myBox.allowScooch = false;
+            }
+        }
     }
+    
     myBox.update();
 }
 
