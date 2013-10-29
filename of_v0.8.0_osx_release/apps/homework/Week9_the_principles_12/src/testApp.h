@@ -24,6 +24,6 @@ public:
     
     float vel, yPos;
     
-    bool allowChange, scoochMode;
+    bool allowChange, scoochMode, squish;
     
 };

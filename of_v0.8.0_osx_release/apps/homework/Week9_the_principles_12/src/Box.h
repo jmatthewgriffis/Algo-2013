@@ -22,7 +22,7 @@ public:
     
     ofVec2f pos, vel, acc, force;
     
-    float friction;
+    float friction, wide, tall;
     
     bool allowScooch;
 };

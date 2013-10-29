@@ -15,6 +15,8 @@ Box::Box() {
 
 void Box::setup() {
     
+    wide = 100;
+    tall = wide;
     pos.set( ofGetWindowSize() / 2 );
     vel.set( 0, 0 );
     acc.set( 0 );
@@ -45,7 +47,7 @@ void Box::draw() {
     
     ofSetColor( 120, 120, 120 );
     ofSetRectMode( OF_RECTMODE_CENTER );
-    ofRect( pos, 100, 100 );
+    ofRect( pos, wide, tall );
 }
 
 void Box::applyForce( ofVec2f _force ) {

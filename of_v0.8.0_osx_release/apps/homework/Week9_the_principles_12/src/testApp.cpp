@@ -8,13 +8,13 @@ void testApp::setup(){
     ofSetFrameRate( 60 );
     ofBackground( 0 );
     
-    vel = 15.0;
-    yPos = ofGetHeight() - 50;
-    allowChange = scoochMode = true;
-    
     myBox.setup();
+    vel = 15.0;
+    yPos = ofGetHeight() - myBox.tall / 2;
+    allowChange = scoochMode = true;
+    squish = false;
     myBox.pos.y = yPos;
-    myBox.pos.x = 0;
+    myBox.pos.x = - 150;
 }
 
 //--------------------------------------------------------------
@@ -31,12 +31,37 @@ void testApp::update(){
         allowChange = true;
     }
     
+    if ( myBox.pos.y <= ofGetHeight() - 50 - 200 * 3 && myBox.pos.x <= ofGetWidth() / 2 ) {
+        scoochMode = false;
+    }
+    
     if ( scoochMode ) {
         if ( ofGetElapsedTimeMillis() % 50 == 0 ) {
-            if ( myBox.allowScooch ) {
+//            if ( myBox.allowScooch ) {
                 myBox.anticipation( ofVec2f( vel, 0.0 ) );
                 myBox.allowScooch = false;
-            }
+//            }
+        }
+    } else {
+        if ( yPos < ofGetHeight() - myBox.tall * 0.5 ) {
+            myBox.acc.set( 0.0, 2 );
+        } else {
+            myBox.acc.set( 0 );
+            myBox.vel.set( 0 );
+        }
+    }
+    
+    if ( myBox.pos.y > ofGetHeight() - myBox.tall / 2 ) {
+        myBox.pos.y = ofGetHeight() - myBox.tall / 2;
+        squish = true;
+    }
+    
+    if ( squish ) {
+        if ( myBox.tall > 1 ) {
+            myBox.tall--;
+            myBox.wide++;
+        } else {
+            setup();
         }
     }
     
