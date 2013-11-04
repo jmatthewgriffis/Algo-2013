@@ -36,7 +36,7 @@ void FlockController::addParticle(int numParticles) {
     }
 }
 
-void FlockController::applyForces( float zoneRadius, float separateThresh, float alignThresh ){
+void FlockController::applyForces( float zoneRadius, float separateThresh, float alignThresh, float separateStr, float alignStr, float attractStr ){
     
     float zoneRadiusSq = zoneRadius * zoneRadius;
     
@@ -61,7 +61,7 @@ void FlockController::applyForces( float zoneRadius, float separateThresh, float
                 if( pct < separateThresh ){
                     float adjustedPct = 1.0 - ofMap(pct, 0.0, separateThresh, 0.0, 1.0 );
                     
-                    ofVec3f F = dir.normalized() * adjustedPct * 0.01;
+                    ofVec3f F = dir.normalized() * adjustedPct * separateStr;
                     
                     b1->applyForce( F );
                     b2->applyForce( -F );
@@ -70,11 +70,23 @@ void FlockController::applyForces( float zoneRadius, float separateThresh, float
                 // align!
                 else if( pct < alignThresh ){
                     
+//                    float alignStrength = 0.005;
+                    
+                    float adjustedPct = 1 - ofMap( pct, separateThresh, alignThresh, 0.0, 1.0 );
+                    float F = adjustedPct * alignStr;
+                    
+                    b1->applyForce( b2->vel.normalized() * F );
+                    b2->applyForce( b1->vel.normalized() * F );
                 }
                 
                 // attract!
                 else{
+//                    float attractStrength = 0.01;
                     
+                    float adjustedPct = ofMap( pct, alignThresh, 1.0, 0.0, 1.0 );
+                    ofVec3f force = dir.normalized() * adjustedPct * attractStr;
+                    b1->applyForce( -force );
+                    b2->applyForce( force );
                 }
                 
                 

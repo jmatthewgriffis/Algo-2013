@@ -2,31 +2,39 @@
 
 //--------------------------------------------------------------
 void testApp::setup(){
-    ofSetVerticalSync(true);
-    ofSetFrameRate(60);
-    ofBackground(0);
+
+    ofSetVerticalSync( true );
+    ofSetFrameRate( 60 );
+    ofBackground( 0 );
     
-    ofEnableDepthTest();
+    for ( int i = 0; i < 50; i++ ) {
+        Particle p;
+        p.pos = ofVec2f( ofRandomWidth(), ofRandomHeight() );
+        p.vel = ofVec2f( 10, 0 );
+        particleList.push_back( p );
+    }
     
-    flocker.addParticle( 500 );
-    
-    myCam.setDistance(400);
+    lastTime = ofGetElapsedTimef();
+    timeScale = 1.0;
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
-    flocker.applyForces(80, 0.4, 0.75, 0.01, 0.00001, 0.01);
-    flocker.update();
+
+    float dt = ofGetElapsedTimef() - lastTime;
+    lastTime = ofGetElapsedTimef();
+    
+    for ( int i = 0; i < particleList.size(); i++ ) {
+        particleList[i].update( dt * 40 * timeScale );
+    }
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){
-    
-    myCam.begin();
-    
-    flocker.draw();
-    
-    myCam.end();
+
+    for ( int i = 0; i < particleList.size(); i++ ) {
+        particleList[i].draw();
+    }
 }
 
 //--------------------------------------------------------------
@@ -42,6 +50,7 @@ void testApp::keyReleased(int key){
 //--------------------------------------------------------------
 void testApp::mouseMoved(int x, int y ){
 
+    timeScale = ofMap( x, 0, ofGetWindowWidth(), -3, 3 );
 }
 
 //--------------------------------------------------------------
