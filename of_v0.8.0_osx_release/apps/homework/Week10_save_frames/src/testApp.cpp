@@ -34,6 +34,8 @@ void testApp::draw(){
     for( int i=0; i<particleList.size(); i++ ){
         particleList[i].draw();
     }
+    
+    ofSaveFrame();
 }
 
 //--------------------------------------------------------------
