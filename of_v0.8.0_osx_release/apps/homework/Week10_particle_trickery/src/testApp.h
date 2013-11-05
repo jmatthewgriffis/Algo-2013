@@ -19,7 +19,7 @@ class testApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 		
-    ofVec3f pos;
-    ofVec3f vel;
-    ofFbo   mFbo;
+    ofVec3f pos, pos_2;
+    ofVec3f vel, vel_2;
+    ofFbo   mFbo, mFbo2;
 };
