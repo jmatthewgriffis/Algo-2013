@@ -21,4 +21,6 @@ public:
     void gotMessage(ofMessage msg);
     
     ofxOscSender mSender;
+    
+    ofVec2f mousePos;
 };

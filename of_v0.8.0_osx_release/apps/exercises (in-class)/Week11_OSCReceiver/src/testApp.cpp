@@ -3,16 +3,41 @@
 //--------------------------------------------------------------
 void testApp::setup(){
 
+    // This one listens to the same port that we were sending to in the other app.
+    mReceiver.setup( 12345 );
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
 
+    checkOsc();
+}
+
+void testApp::checkOsc() {
+    
+    while( mReceiver.hasWaitingMessages() ) {
+        ofxOscMessage m;
+        mReceiver.getNextMessage( &m );
+        
+        string addr = m.getAddress();
+        
+        if ( addr == "/mouse/pos" ) {
+            
+            int xPos = m.getArgAsInt32( 0 );
+            int yPos = m.getArgAsInt32( 1 );
+            
+            mousePos.set( xPos, yPos );
+//            cout<<addr<<endl;
+        }
+        
+//        cout<<addr<<endl;
+    }
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){
 
+    ofCircle( mousePos, 20 );
 }
 
 //--------------------------------------------------------------
