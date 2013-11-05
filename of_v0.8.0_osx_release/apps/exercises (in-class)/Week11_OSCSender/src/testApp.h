@@ -23,4 +23,5 @@ public:
     ofxOscSender mSender;
     
     ofVec2f mousePos;
+    ofVec2f pos, vel;
 };

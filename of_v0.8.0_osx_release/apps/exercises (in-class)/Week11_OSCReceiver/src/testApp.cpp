@@ -5,6 +5,8 @@ void testApp::setup(){
 
     // This one listens to the same port that we were sending to in the other app.
     mReceiver.setup( 12345 );
+    
+    ofBackground( 0 );
 }
 
 //--------------------------------------------------------------
@@ -28,6 +30,11 @@ void testApp::checkOsc() {
             
             mousePos.set( xPos, yPos );
 //            cout<<addr<<endl;
+        } else if ( addr == "/ball/pos") {
+            float xPos = m.getArgAsFloat( 0 );
+            float yPos = m.getArgAsFloat( 1 );
+            
+            ballPos.set( xPos, yPos );
         }
         
 //        cout<<addr<<endl;
@@ -37,7 +44,12 @@ void testApp::checkOsc() {
 //--------------------------------------------------------------
 void testApp::draw(){
 
-    ofCircle( mousePos, 20 );
+    ofPushMatrix();{
+        
+        // Simulate one giant screen. The ball is mirrored across both apps, but the ball only bounces when it goes an entire screen width off the right of the sender, and then the receiver is translated an entire screen width to the left, so the ball appears to move from the left of the sender to the right of the receiver and back. WHOA.
+        ofTranslate( -ofGetWindowWidth(), 0 );
+        ofCircle( ballPos, 20 );
+    }ofPopMatrix();
 }
 
 //--------------------------------------------------------------
