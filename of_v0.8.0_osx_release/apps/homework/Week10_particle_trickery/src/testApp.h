@@ -22,4 +22,8 @@ class testApp : public ofBaseApp{
     ofVec3f pos, pos_2;
     ofVec3f vel, vel_2;
     ofFbo   mFbo, mFbo2;
+    
+    // CHALLENGE: 1. Make a particle application and use some of the techniques we talked about in class, or some of your own devising to make it look like there are many more particles than there actually are.  I'll run the app before looking at the source code, see if you can come up with a novel way!
+    
+    // I am modifying Charlie's Fbo repo example.
 };

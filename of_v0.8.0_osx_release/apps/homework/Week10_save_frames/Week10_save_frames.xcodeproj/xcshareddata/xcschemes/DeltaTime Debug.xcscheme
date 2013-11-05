@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-               BuildableName = "Week10_particle_trickery.app"
-               BlueprintName = "Week10_particle_trickery"
-               ReferencedContainer = "container:Week10_particle_trickery.xcodeproj">
+               BuildableName = "DeltaTime.app"
+               BlueprintName = "Week10_save_frames"
+               ReferencedContainer = "container:Week10_save_frames.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-            BuildableName = "Week10_particle_trickery.app"
-            BlueprintName = "Week10_particle_trickery"
-            ReferencedContainer = "container:Week10_particle_trickery.xcodeproj">
+            BuildableName = "DeltaTime.app"
+            BlueprintName = "Week10_save_frames"
+            ReferencedContainer = "container:Week10_save_frames.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -52,9 +52,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-            BuildableName = "Week10_particle_trickery.app"
-            BlueprintName = "Week10_particle_trickery"
-            ReferencedContainer = "container:Week10_particle_trickery.xcodeproj">
+            BuildableName = "DeltaTime.app"
+            BlueprintName = "Week10_save_frames"
+            ReferencedContainer = "container:Week10_save_frames.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -70,9 +70,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-            BuildableName = "Week10_particle_trickery.app"
-            BlueprintName = "Week10_particle_trickery"
-            ReferencedContainer = "container:Week10_particle_trickery.xcodeproj">
+            BuildableName = "DeltaTime.app"
+            BlueprintName = "Week10_save_frames"
+            ReferencedContainer = "container:Week10_save_frames.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
