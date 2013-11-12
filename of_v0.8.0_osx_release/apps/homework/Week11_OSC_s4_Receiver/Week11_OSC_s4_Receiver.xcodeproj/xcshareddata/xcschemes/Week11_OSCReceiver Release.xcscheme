@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-               BuildableName = "Week11_OSCReceiver.app"
-               BlueprintName = "Week11_OSCReceiver"
-               ReferencedContainer = "container:Week11_OSCReceiver.xcodeproj">
+               BuildableName = "Week11_OSC_s2_Receiver.app"
+               BlueprintName = "Week11_OSC_s4_Receiver"
+               ReferencedContainer = "container:Week11_OSC_s4_Receiver.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-            BuildableName = "Week11_OSCReceiver.app"
-            BlueprintName = "Week11_OSCReceiver"
-            ReferencedContainer = "container:Week11_OSCReceiver.xcodeproj">
+            BuildableName = "Week11_OSC_s2_Receiver.app"
+            BlueprintName = "Week11_OSC_s4_Receiver"
+            ReferencedContainer = "container:Week11_OSC_s4_Receiver.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -52,9 +52,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-            BuildableName = "Week11_OSCReceiver.app"
-            BlueprintName = "Week11_OSCReceiver"
-            ReferencedContainer = "container:Week11_OSCReceiver.xcodeproj">
+            BuildableName = "Week11_OSC_s2_Receiver.app"
+            BlueprintName = "Week11_OSC_s4_Receiver"
+            ReferencedContainer = "container:Week11_OSC_s4_Receiver.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -70,9 +70,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-            BuildableName = "Week11_OSCReceiver.app"
-            BlueprintName = "Week11_OSCReceiver"
-            ReferencedContainer = "container:Week11_OSCReceiver.xcodeproj">
+            BuildableName = "Week11_OSC_s2_Receiver.app"
+            BlueprintName = "Week11_OSC_s4_Receiver"
+            ReferencedContainer = "container:Week11_OSC_s4_Receiver.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

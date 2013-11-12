@@ -24,6 +24,6 @@ public:
     
     ofxOscReceiver mReceiver;
     
-    ofVec2f mousePos, ballPos;
+    ofVec2f ballPos;
     
 };
