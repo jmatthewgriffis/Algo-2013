@@ -25,6 +25,8 @@ public:
     ofxOscReceiver mReceiver;
     
     ofVec2f ballPos;
+    ofColor c1, c2;
     float ballRad;
+    bool exploding;
     
 };

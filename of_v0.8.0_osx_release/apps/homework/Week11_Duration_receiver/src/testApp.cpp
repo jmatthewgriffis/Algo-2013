@@ -5,6 +5,7 @@ void testApp::setup(){
     
     ofSetFrameRate( 60 );
     ofSetVerticalSync( true );
+    ofSetCircleResolution( 100 );
     
     mReceiver.setup( 12345 );
     
@@ -12,12 +13,26 @@ void testApp::setup(){
     
     ballPos = ofGetWindowSize() / 2.0;
     ballRad = 10;
+    
+    c1 = ofColor( 255 );
+    c2 = ofColor ( 0 );
+    
+    exploding = false;
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
     
     checkOsc();
+    
+    if ( exploding ) {
+        
+        if ( ballRad < ofGetWindowWidth() / 2.0 + 10 ) {
+            ballRad ++;
+        }
+        
+        else setup();
+    }
 }
 
 void testApp::checkOsc() {
@@ -36,7 +51,11 @@ void testApp::checkOsc() {
          }*/
         
         if ( addr == "/ball/size") {
-            ballRad += 10;
+            ballRad += 50;
+        }
+        
+        else if ( addr == "/ball/explode" ) {
+            exploding = true;
         }
     }
 }
@@ -44,7 +63,17 @@ void testApp::checkOsc() {
 //--------------------------------------------------------------
 void testApp::draw(){
     
-    ofCircle( ballPos, ballRad );
+    if ( !exploding ) {
+        ofSetColor( c2 );
+        ofCircle( ballPos, ballRad+1 );
+        ofSetColor( c1 );
+        ofCircle( ballPos, ballRad );
+    } else {
+        ofSetColor( c1 );
+        ofCircle( ballPos, ballRad+1 );
+        ofSetColor( c2 );
+        ofCircle( ballPos, ballRad );
+    }
 }
 
 //--------------------------------------------------------------
