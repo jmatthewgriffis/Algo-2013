@@ -36,8 +36,8 @@ Hint: It's possible to set a default position for the actual oF window by callin
      
      */
     
-    ofxOscSender mSender;
+    // I'm modifying the in-class example. -Matt
     
-    ofVec2f mousePos;
+    ofxOscSender mSender_s2, mSender_s3, mSender_s4;
     ofVec2f pos, vel;
 };
