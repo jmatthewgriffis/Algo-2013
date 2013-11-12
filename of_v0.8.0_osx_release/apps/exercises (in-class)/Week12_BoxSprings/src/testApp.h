@@ -22,5 +22,10 @@ public:
     
     ofxBox2d box2d;
     
-    ofxBox2dCircle boxCircle;
+    ofxBox2dCircle boxCircle; // world
+    
+    ofxBox2dCircle anchor; // initial anchor
+    
+    vector< ofxBox2dCircle > circleList;
+    vector< ofxBox2dJoint > jointList;
 };
