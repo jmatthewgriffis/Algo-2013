@@ -51,7 +51,7 @@ void testApp::checkOsc() {
          }*/
         
         if ( addr == "/ball/size") {
-            ballRad += 50;
+            ballRad += 15;
         }
         
         else if ( addr == "/ball/explode" ) {
