@@ -3,16 +3,34 @@
 //--------------------------------------------------------------
 void testApp::setup(){
 
+    ofSetVerticalSync( true );
+    ofSetFrameRate( 60 );
+    ofBackground( 0 );
+    
+    // This gets box2d going.
+    box2d.init();
+    
+    box2d.setGravity( 0, 10 );
+    box2d.setFPS( 30.0 ); // How frequently the physics update.
+//    box2d.createGround();
+    box2d.createBounds();
+    box2d.registerGrabbing();
+    
+    // Physics must be set before the setup.
+    boxCircle.setPhysics( 1.0, 0.5, 1.0 );
+    boxCircle.setup( box2d.getWorld(), 200, 200, 20 );
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
 
+    box2d.update();
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){
 
+    boxCircle.draw();
 }
 
 //--------------------------------------------------------------
