@@ -1,1 +1,1 @@
-I made an exceedingly creepy critter. <a href="http://sodaplay.com/creators/jmatthewgriffis/items/hangercreep_finished">Click here to download it</a> and be creeped out.
+I made an exceedingly creepy critter. <a target="_blank" href="http://sodaplay.com/creators/jmatthewgriffis/items/hangercreep_finished">Click here to download it</a> and be creeped out.
