@@ -1,3 +1,9 @@
+algo2013
+homework/Space_Odyssey_2_-OLD_REPO-
+homework/Space_Odyssey_2_controller/
+
+#------------------------------------
+# boilerplate
 
 # OF-specific ignore patterns
 
@@ -85,13 +91,3 @@ Desktop.ini
 
 # Miscellaneous
 .mailmap
-
-of_v0.8.0_osx_release/algo2013/
-
-of_v0.8.0_osx_release/addons/ofxUI/
-
-of_v0.8.0_osx_release/addons/ofxBox2d/
-
-of_v0.8.0_osx_release/apps/homework/Space_Odyssey_2_-OLD_REPO-
-
-of_v0.8.0_osx_release/apps/homework/Space_Odyssey_2_controller/
